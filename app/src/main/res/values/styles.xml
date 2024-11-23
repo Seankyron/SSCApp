@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Outline Color -->
+        <item name="boxStrokeColor">@color/gray_light</item>
+        <!-- Hint Text Color -->
+        <item name="hintTextColor">@color/gray_light</item>
+
+    </style>
+</resources>

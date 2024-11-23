@@ -29,5 +29,7 @@
     <!-- Button and Indicator Colors -->
     <color name="indicator_active">#D32F2F</color>
     <color name="indicator_inactive">#BDBDBD</color>
+
+
 </resources>
 

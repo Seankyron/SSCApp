@@ -7,8 +7,8 @@
         android:title="@string/action_search"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_notifications"
-        android:icon="@drawable/ic_notifications"
+        android:id="@+id/action_person"
+        android:icon="@drawable/ic_person"
         android:title="@string/action_notifications"
         app:showAsAction="ifRoom" />
 </menu>

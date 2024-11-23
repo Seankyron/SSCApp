@@ -27,5 +27,41 @@
     <!-- Action Bar Menu -->
     <string name="action_search">Search</string>
     <string name="action_notifications">Notifications</string>
+
+    <!-- Toolbar -->
+    <string name="membership_payment_title">Membership Payment</string>
+
+    <!-- Header -->
+    <string name="membership_fee_title">COLLECTION OF MEMBERSHIP FEE</string>
+    <string name="semester_info">FIRST SEMESTER AY 2024 - 2025</string>
+    <string name="membership_fee_amount">₱45 PER SEMESTER</string>
+
+    <!-- GCash Information -->
+    <string name="gcash_payment_info">GCash Payment Information</string>
+    <string name="officer1_name">HAZEL TORRES</string>
+    <string name="officer1_title">SSC Deputy Finance Officer</string>
+    <string name="officer1_phone">0920 817 9878</string>
+    <string name="officer1_students">For students from:</string>
+    <string name="officer1_departments">• College of Engineering Technology\n• CAFAD College of Architecture, Fine Arts, and Design\n• College of Informatics and Computing Sciences</string>
+
+    <string name="officer2_name">MA. THERESE LYNNE ARELLANO</string>
+    <string name="officer2_title">SSC Finance Officer</string>
+    <string name="officer2_phone">0920 204 5189</string>
+    <string name="officer2_students">For students from:</string>
+    <string name="officer2_departments">• College of Engineering\n• Balayan Campus\n• Lobo Campus\n• Mabini Campus</string>
+
+    <!-- Important Notes -->
+    <string name="important_notes_title">Important Notes</string>
+    <string name="important_notes_content">• A screenshot of e-receipt MUST be uploaded. NO SCREENSHOT, PAYMENT NOT VALID.\n\n• The form must be filled up for 1 student per transaction only.\n\n• Money clip option for GCash is NOT ALLOWED.\n\n• Payment via Kiosk Machine is NOT ALLOWED.\n\n• Students who are enrolled for Midterm/Summer Class must transfer their payment to the SSC Alangilan Finance Officer.</string>
+
+    <!-- Payment Submission -->
+    <string name="submit_payment_title">Submit Payment</string>
+    <string name="gcash_reference_hint">Enter GCash Reference Number</string>
+    <string name="upload_button_text">Upload GCash Receipt</string>
+    <string name="submit_button_text">Submit for Verification</string>
+
+    <!-- Accessibility -->
+    <string name="receipt_image_description">Image preview of uploaded GCash receipt</string>
+    <string name="upload_button_description">Upload button for GCash receipt</string>
 </resources>
 
