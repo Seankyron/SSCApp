@@ -1,6 +1,7 @@
 package com.example.sscapp;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sscapp.adapters.AnnouncementsAdapter;
 import com.example.sscapp.adapters.QuickAccessAdapter;
@@ -17,6 +20,7 @@ import com.example.sscapp.adapters.ServicesAdapter;
 import com.example.sscapp.models.Announcement;
 import com.example.sscapp.models.QuickLink;
 import com.example.sscapp.models.Service;
+import com.example.sscapp.utils.CarouselLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
     private RecyclerView announcementsRecyclerView;
     private LinearLayout quickAccessContainer;
     private RecyclerView servicesRecyclerView;
+    private List<Announcement> announcements;
+    private Handler autoScrollHandler;
+    private int currentAnnouncementPosition = 0;
 
     @Nullable
     @Override
@@ -42,8 +49,20 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAutoScroll();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopAutoScroll();
+    }
+
     private void setupAnnouncements() {
-        List<Announcement> announcements = new ArrayList<>();
+        announcements = new ArrayList<>();
         announcements.add(new Announcement(1, "Membership Payment Deadline",
                 "Last day of payment is on November 30, 2024", "urgent",
                 "Deadline", "SSC Treasury", "/api/placeholder/800/400"));
@@ -56,19 +75,49 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
 
         AnnouncementsAdapter adapter = new AnnouncementsAdapter(announcements);
 
-        announcementsRecyclerView.setClipToPadding(false);
-        announcementsRecyclerView.setPadding(8, 0, 8, 0);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-        );
+        CarouselLayoutManager layoutManager = new CarouselLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         announcementsRecyclerView.setLayoutManager(layoutManager);
         announcementsRecyclerView.setAdapter(adapter);
+
+        // Add padding to show part of the next and previous items
+        int padding = getResources().getDimensionPixelOffset(R.dimen.carousel_padding);
+        announcementsRecyclerView.setPadding(padding, 0, padding, 0);
+        announcementsRecyclerView.setClipToPadding(false);
+
+        // Add PagerSnapHelper to snap to the center
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(announcementsRecyclerView);
+
+        // Set up infinite scrolling
+        adapter.setItemCount(Integer.MAX_VALUE);
+        int middlePosition = Integer.MAX_VALUE / 2;
+        announcementsRecyclerView.scrollToPosition(middlePosition);
+        currentAnnouncementPosition = middlePosition;
     }
 
-    private void setupQuickAccess() {
+    private void startAutoScroll() {
+        autoScrollHandler = new Handler();
+        autoScrollHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentAnnouncementPosition++;
+                announcementsRecyclerView.smoothScrollToPosition(currentAnnouncementPosition);
+                autoScrollHandler.postDelayed(this, 5000); // Scroll every 5 seconds
+            }
+        }, 5000); // Start after 5 seconds
+    }
+
+    private void stopAutoScroll() {
+        if (autoScrollHandler != null) {
+            autoScrollHandler.removeCallbacksAndMessages(null);
+        }
+    }
+
+
+
+
+private void setupQuickAccess() {
         List<QuickLink> quickLinks = new ArrayList<>();
         quickLinks.add(new QuickLink("Membership", R.drawable.ic_credit_card, "/membership"));
         quickLinks.add(new QuickLink("Events", R.drawable.ic_calendar, "/events"));

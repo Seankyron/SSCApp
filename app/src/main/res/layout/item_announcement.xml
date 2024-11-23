@@ -2,22 +2,22 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_width="360dp"
+    android:layout_height="380dp"
+    android:layout_margin="16dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
+    app:cardElevation="8dp"
     app:strokeWidth="0dp"
     app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/announcementImage"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,16 +65,18 @@
         <TextView
             android:id="@+id/announcementDescription"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:textSize="14sp"
             android:textColor="@color/text_secondary"
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="16dp"
-            android:maxLines="3"
+            android:layout_marginBottom="8dp"
+            android:maxLines="4"
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/announcementTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/announcementAuthor" />
 
         <TextView
             android:id="@+id/announcementAuthor"
@@ -83,10 +85,10 @@
             android:textSize="12sp"
             android:textColor="@color/text_secondary"
             android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/announcementDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
+

@@ -17,9 +17,15 @@ import java.util.List;
 public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdapter.ViewHolder> {
 
     private final List<Announcement> announcements;
+    private int itemCount = 0;
 
     public AnnouncementsAdapter(List<Announcement> announcements) {
         this.announcements = announcements;
+    }
+
+    public void setItemCount(int count) {
+        this.itemCount = count;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -31,7 +37,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Announcement announcement = announcements.get(position);
+        Announcement announcement = announcements.get(position % announcements.size());
         holder.title.setText(announcement.getTitle());
         holder.description.setText(announcement.getDescription());
         holder.type.setText(announcement.getType().toUpperCase());
@@ -74,7 +80,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
 
     @Override
     public int getItemCount() {
-        return announcements.size();
+        return itemCount == 0 ? announcements.size() : itemCount;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,3 +98,4 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
         }
     }
 }
+
