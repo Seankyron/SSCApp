@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SSC App</string>
+
+    <!-- Main Activity -->
+    <string name="toolbar_description">Top app bar with menu options</string>
+    <string name="main_content_description">Main content area</string>
+    <string name="bottom_navigation_description">Bottom navigation menu</string>
+
+    <!-- Home Fragment -->
+    <string name="important_announcements">Important Announcements</string>
+    <string name="announcements_carousel_description">Carousel of important announcements</string>
+    <string name="quick_access">Quick Access</string>
+    <string name="quick_access_description">Grid of quick access buttons</string>
+    <string name="sscervices">SSCervices</string>
+    <string name="sscervices_description">List of available SSC services</string>
+
+    <string name="quick_access_icon">Quick access icon</string>
+
+    <!-- Menu Items -->
+    <string name="menu_home">Home</string>
+    <string name="menu_updates">Updates</string>
+    <string name="menu_store">Store</string>
+    <string name="menu_events">Events</string>
+    <string name="menu_officers">Officers</string>
+
+    <!-- Action Bar Menu -->
+    <string name="action_search">Search</string>
+    <string name="action_notifications">Notifications</string>
+</resources>
+
