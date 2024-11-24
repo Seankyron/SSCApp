@@ -3,6 +3,8 @@ package com.example.sscapp;
 import android.os.Bundle;
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 import com.example.sscapp.adapters.EventAdapter;
 import com.example.sscapp.models.Event;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -41,11 +45,11 @@ public class EventTimelineActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         recyclerView = findViewById(R.id.eventRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new TimelineItemDecoration());
 
         List<Event> events = getEvents();
         adapter = new EventAdapter(events);
         recyclerView.setAdapter(adapter);
+
     }
 
     private List<Event> getEvents() {

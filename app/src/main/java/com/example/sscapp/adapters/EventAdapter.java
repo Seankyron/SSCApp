@@ -3,6 +3,7 @@ package com.example.sscapp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,6 +19,10 @@ import java.util.Locale;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private final List<Event> events;
     private final SimpleDateFormat dateFormat;
+
+    public interface EventCompletionListener {
+        void onEventCompletionChanged(boolean isCompleted);
+    }
 
     public EventAdapter(List<Event> events) {
         this.events = events;
@@ -41,6 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.eventDescription.setText(event.getDescription());
         holder.eventTypeIcon.setImageResource(event.getIconResource());
 
+
         // Set up description expansion/collapse
         holder.expandCollapseButton.setOnClickListener(v -> {
             boolean isExpanded = holder.eventDescription.getMaxLines() > 2;
@@ -60,6 +66,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         final TextView eventDescription;
         final TextView expandCollapseButton;
         final ImageView eventTypeIcon;
+
 
         EventViewHolder(View itemView) {
             super(itemView);
