@@ -5,6 +5,10 @@
     <color name="red_primary_dark">#B71C1C</color>
     <color name="red_accent">#F44336</color>
 
+    <!-- Card specific colors -->
+    <color name="icon_background">#E3F2FD</color> <!-- Kept for design continuity -->
+    <color name="stroke_color">#E0E0E0</color> <!-- Matches gray_light -->
+
     <!-- Status Colors -->
     <color name="green">#4CAF50</color>
     <color name="yellow">#FFEB3B</color>

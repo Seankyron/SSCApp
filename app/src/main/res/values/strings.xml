@@ -63,5 +63,7 @@
     <!-- Accessibility -->
     <string name="receipt_image_description">Image preview of uploaded GCash receipt</string>
     <string name="upload_button_description">Upload button for GCash receipt</string>
+
+    <string name="event_timeline_title">Event Timeline</string>
 </resources>
 
