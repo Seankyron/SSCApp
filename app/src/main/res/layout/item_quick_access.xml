@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="0dp"
     app:cardBackgroundColor="@color/white"
     app:rippleColor="@color/white"
     android:clickable="true"
     android:focusable="true"
-    app:strokeWidth="0.5dp"
-    app:strokeColor="@color/red_primary">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
