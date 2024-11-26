@@ -1,18 +1,18 @@
-package com.example.sscapp;
+package com.example.sscapp.quickaccesscard;
 
 import android.os.Bundle;
 import android.graphics.Rect;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
+
+import com.example.sscapp.R;
 import com.example.sscapp.adapters.EventAdapter;
 import com.example.sscapp.models.Event;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.Calendar;

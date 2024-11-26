@@ -21,6 +21,8 @@ import com.example.sscapp.adapters.ServicesAdapter;
 import com.example.sscapp.models.Announcement;
 import com.example.sscapp.models.QuickLink;
 import com.example.sscapp.models.Service;
+import com.example.sscapp.quickaccesscard.EventTimelineActivity;
+import com.example.sscapp.quickaccesscard.LostAndFoundActivity;
 import com.example.sscapp.quickaccesscard.MembershipPaymentActivity;
 import com.example.sscapp.utils.CarouselLayoutManager;
 import java.util.ArrayList;
@@ -180,8 +182,8 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
                 break;
 
             case "/lost-found":
-                Toast.makeText(getContext(), "Lost & Found feature coming soon!", Toast.LENGTH_SHORT).show();
-                return;
+                intent = new Intent(getContext(), LostAndFoundActivity.class);
+                break;
 
             case "/map":
                 Toast.makeText(getContext(), "Campus Map feature coming soon!", Toast.LENGTH_SHORT).show();
