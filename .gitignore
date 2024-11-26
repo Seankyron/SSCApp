@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Node.js modules
+node_modules/
+
+# Environment variables
+.env
