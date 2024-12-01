@@ -1,37 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="0dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    android:layout_margin="4dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/white"
+    app:rippleColor="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/quickAccessIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="@string/quick_access_icon"
-            app:tint="@color/red_primary" />
+            android:id="@+id/icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/red_primary"
+            tools:src="@drawable/ic_timeline"/>
 
         <TextView
-            android:id="@+id/quickAccessTitle"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textColor="@color/text_primary"
-            android:gravity="center" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon"
+            tools:text="Events Timeline"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -21,6 +21,8 @@ import java.util.Locale;
 
 import com.example.sscapp.adapters.EventAdapter;
 import com.example.sscapp.models.Event;
+
+import com.example.sscapp.R;
 
 public class EventsFragment extends Fragment {
     private RecyclerView eventsRecyclerView;

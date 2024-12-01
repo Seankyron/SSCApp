@@ -13,13 +13,19 @@
         android:theme="@style/Theme.SSCApp"
         tools:targetApi="31">
         <activity
+            android:name=".quickaccesscard.LostAndFoundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quickaccesscard.EventTimelineActivity"
+            android:exported="false" />
+        <activity
             android:name=".quickaccesscard.MembershipPaymentActivity"
             android:exported="false" />
         <activity
             android:name=".OfficersFragment"
             android:exported="false" />
         <activity
-            android:name=".EventsFragment"
+            android:name=".fragments.EventsFragment"
             android:exported="false" />
         <activity
             android:name=".StoreFragment"

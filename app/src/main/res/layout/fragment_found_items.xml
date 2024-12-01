@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/red_primary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/infoText"
+                android:text="If you've found an item, please bring it to the SSC office. They will post it here and contact the owner if it's claimed."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search found items"
+        android:iconifiedByDefault="false"
+        android:layout_marginBottom="12dp"
+        android:background="@color/gray_light"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foundItemsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
