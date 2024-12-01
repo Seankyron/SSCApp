@@ -11,5 +11,11 @@
         android:icon="@drawable/ic_person"
         android:title="@string/action_notifications"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="@string/action_cart"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
 </menu>
 

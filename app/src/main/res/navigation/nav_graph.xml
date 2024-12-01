@@ -9,7 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.example.sscapp.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_storeFragment"
+            app:destination="@id/storeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_updatesFragment"
+            app:destination="@id/updatesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_officersFragment"
+            app:destination="@id/officersFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/updatesFragment"
@@ -21,7 +34,11 @@
         android:id="@+id/storeFragment"
         android:name="com.example.sscapp.StoreFragment"
         android:label="Store"
-        tools:layout="@layout/fragment_store" />
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/eventsFragment"
@@ -35,4 +52,39 @@
         android:label="Officers"
         tools:layout="@layout/fragment_officers" />
 
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.example.sscapp.ProductDetailsFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="product"
+            app:argType="com.example.sscapp.models.Product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.sscapp.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_storeFragment"
+            app:destination="@id/storeFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_storeFragment_to_productDetailsFragment"
+        app:destination="@id/productDetailsFragment"
+        app:popUpTo="@id/storeFragment"
+        app:popUpToInclusive="false" />
+    <action
+        android:id="@+id/action_productDetailsFragment_to_storeFragment"
+        app:destination="@id/storeFragment"
+        app:popUpTo="@id/storeFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_cartFragment"
+        app:destination="@id/cartFragment" />
+
 </navigation>
+
