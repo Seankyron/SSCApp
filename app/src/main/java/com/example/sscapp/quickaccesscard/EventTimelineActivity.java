@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.example.sscapp.R;
 import com.example.sscapp.adapters.EventAdapter;
+import com.example.sscapp.adapters.EventTimelineAdapter;
 import com.example.sscapp.models.Event;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 public class EventTimelineActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private EventAdapter adapter;
+    private EventTimelineAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class EventTimelineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Event> events = getEvents();
-        adapter = new EventAdapter(events);
+        adapter = new EventTimelineAdapter(events);
         recyclerView.setAdapter(adapter);
 
     }
