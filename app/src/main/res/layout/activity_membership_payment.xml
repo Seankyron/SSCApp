@@ -38,7 +38,8 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/red_primary">
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -52,7 +53,7 @@
                         android:text="COLLECTION OF MEMBERSHIP FEE"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/red_primary"
                         android:gravity="center"/>
 
                     <TextView
@@ -60,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:text="FIRST SEMESTER AY 2024 - 2025"
                         android:textSize="18sp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:gravity="center"
                         android:layout_marginTop="4dp"/>
 
@@ -70,7 +71,7 @@
                         android:text="₱45 PER SEMESTER"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/red_primary"
                         android:gravity="center"
                         android:layout_marginTop="16dp"/>
                 </LinearLayout>
@@ -83,7 +84,8 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,7 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -240,7 +243,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
-
+                android:layout_marginHorizontal="4dp"
                 app:cardBackgroundColor="@color/background_light">
 
                 <LinearLayout

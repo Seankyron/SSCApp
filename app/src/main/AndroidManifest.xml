@@ -13,6 +13,33 @@
         android:theme="@style/Theme.SSCApp"
         tools:targetApi="31">
         <activity
+            android:name=".ContactFragment"
+            android:exported="false" />
+        <activity
+            android:name=".OrgStructureFragment"
+            android:exported="false" />
+        <activity
+            android:name=".CurrentOfficersFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ContactInfoFragment"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ZoomConnect"
+            android:exported="false" />
+        <activity
+            android:name=".activities.reSSCue"
+            android:exported="false" />
+        <activity
+            android:name=".activities.eSSCentials"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CALagapay"
+            android:exported="false" />
+        <activity
+            android:name=".ProjectAgapayActivity"
+            android:exported="false" />
+        <activity
             android:name=".quickaccesscard.LostAndFoundActivity"
             android:exported="false" />
         <activity

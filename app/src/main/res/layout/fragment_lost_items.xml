@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/infoText"
-                android:text="If you've lost an item, please report it to the SSC office. They will post it here and contact you if it's found."
+                android:text="@string/if_you_ve_lost_an_item_please_report_it_to_the_ssc_office_they_will_post_it_here_and_contact_you_if_it_s_found"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"

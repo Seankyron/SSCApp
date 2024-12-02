@@ -1,5 +1,6 @@
 package com.example.sscapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,19 @@ import java.util.List;
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> {
 
     private final List<Service> services;
+    private final Context context;
+    private OnItemClickListener listener;
 
-    public ServicesAdapter(List<Service> services) {
+    public interface OnItemClickListener {
+        void onItemClick(Service service);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public ServicesAdapter(Context context, List<Service> services) {
+        this.context = context;
         this.services = services;
     }
 
@@ -33,6 +45,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         holder.title.setText(service.getTitle());
         holder.description.setText(service.getDescription());
         holder.status.setText(service.getStatus());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(service);
+            }
+        });
     }
 
     @Override

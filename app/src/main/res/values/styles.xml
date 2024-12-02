@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CustomTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <!-- Outline Color -->
-        <item name="boxStrokeColor">@color/gray_light</item>
-        <!-- Hint Text Color -->
-        <item name="hintTextColor">@color/gray_light</item>
-
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/box_stroke_color</item>
+        <item name="hintTextColor">@color/hint_text_color</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="boxBackgroundColor">@color/white</item>
     </style>
+
+    <!-- Style for fully booked dates - use red_primary color -->
+    <style name="FullyBookedDateStyle" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/red_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Style for available dates - use red_primary_dark color -->
+    <style name="AvailableDateStyle" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/red_primary_dark</item>
+    </style>
+
+    <style name="CalendarViewDateCustomText" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="CalendarViewWeekCustomText" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
 
 

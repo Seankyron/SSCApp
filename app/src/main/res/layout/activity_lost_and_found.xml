@@ -17,7 +17,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Lost and Found"
             app:titleTextColor="@color/white"
-            android:contentDescription="Lost and Found screen" />
+            android:contentDescription="@string/lost_and_found_screen" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:contentDescription="Swipe left or right to switch between Lost Items and Found Items" />
+        android:contentDescription="@string/swipe_left_or_right_to_switch_between_lost_items_and_found_items" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

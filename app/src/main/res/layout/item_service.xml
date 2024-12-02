@@ -47,4 +47,3 @@
         android:paddingVertical="4dp"
         android:background="@drawable/bg_service_status" />
 </LinearLayout>
-

@@ -1,13 +1,13 @@
 package com.example.sscapp.models;
 
 public class Announcement {
-    private int id;
-    private String title;
-    private String description;
-    private String type;
-    private String category;
-    private String author;
-    private String image;
+    private final int id;
+    private final String title;
+    private final String description;
+    private final String type;
+    private final String category;
+    private final String author;
+    private final String image;
 
     public Announcement(int id, String title, String description, String type, String category, String author, String image) {
         this.id = id;

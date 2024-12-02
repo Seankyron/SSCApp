@@ -63,6 +63,18 @@
     <!-- Accessibility -->
     <string name="receipt_image_description">Image preview of uploaded GCash receipt</string>
     <string name="upload_button_description">Upload button for GCash receipt</string>
-    <string name="action_cart">Cart</string>
+
+    <string name="event_timeline_title">Event Timeline</string>
+    <string name="submit_calculator_request">Submit Calculator Request</string>
+    <string name="select_date">Select Date</string>
+    <string name="date_of_claiming">Date of Claiming</string>
+    <string name="enter_purpose_of_borrowing">Enter purpose of borrowing</string>
+    <string name="purpose_of_borrowing">Purpose of Borrowing</string>
+    <string name="calculator_availability">Calculator Availability</string>
+    <string name="supplying_calculators_to_students_for_use_in_exams_and_coursework">Supplying calculators to students for use in exams and coursework</string>
+    <string name="calagapay_calculator_lending">CALagapay Calculator Lending</string>
+    <string name="if_you_ve_lost_an_item_please_report_it_to_the_ssc_office_they_will_post_it_here_and_contact_you_if_it_s_found">If you\'ve lost an item, please report it to the SSC office. They will post it here and contact you if it\'s found.</string>
+    <string name="lost_and_found_screen">Lost and Found screen</string>
+    <string name="swipe_left_or_right_to_switch_between_lost_items_and_found_items">Swipe left or right to switch between Lost Items and Found Items</string>
 </resources>
 

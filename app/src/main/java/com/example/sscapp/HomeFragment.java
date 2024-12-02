@@ -15,6 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sscapp.activities.CALagapay;
+import com.example.sscapp.activities.ZoomConnect;
+import com.example.sscapp.activities.eSSCentials;
+import com.example.sscapp.activities.reSSCue;
 import com.example.sscapp.adapters.AnnouncementsAdapter;
 import com.example.sscapp.adapters.QuickAccessAdapter;
 import com.example.sscapp.adapters.ServicesAdapter;
@@ -131,7 +136,7 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
         quickLinks.add(new QuickLink("Membership", R.drawable.ic_credit_card, "/membership", true));
         quickLinks.add(new QuickLink("Events Timeline", R.drawable.ic_timeline, "/events", false));
         quickLinks.add(new QuickLink("Lost & Found", R.drawable.ic_search, "/lost-found", false));
-        quickLinks.add(new QuickLink("Campus Map", R.drawable.ic_contact_emergency, "/map", false));
+        quickLinks.add(new QuickLink("Emergency Contacts", R.drawable.ic_contact_emergency, "/contacts", false));
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         LinearLayout currentRow = null;
@@ -185,8 +190,8 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
                 intent = new Intent(getContext(), LostAndFoundActivity.class);
                 break;
 
-            case "/map":
-                Toast.makeText(getContext(), "Campus Map feature coming soon!", Toast.LENGTH_SHORT).show();
+            case "/contacts":
+                Toast.makeText(getContext(), "Contacts feature coming soon!", Toast.LENGTH_SHORT).show();
                 return;
 
             default:
@@ -204,9 +209,35 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
         services.add(new Service(1, "Project Agapay", "Affordable printing services", R.drawable.ic_file_text, "Available"));
         services.add(new Service(2, "CALagapay", "Calculator lending service", R.drawable.ic_calculator, "Limited"));
         services.add(new Service(3, "eSSCentials", "Walkie-talkie borrowing service", R.drawable.ic_radio, "Available"));
+        services.add(new Service(4, "ReSSCue", "Cash assistance lending service", R.drawable.ic_assistance, "Available"));
+        services.add(new Service(5, "Zoom Connect", "Virtual event support service", R.drawable.ic_meeting, "Available"));
 
-        ServicesAdapter adapter = new ServicesAdapter(services);
+        ServicesAdapter adapter = new ServicesAdapter(getContext(), services);
         servicesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         servicesRecyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new ServicesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Service service) {
+                switch (service.getTitle()) {
+                    case "Project Agapay":
+                        startActivity(new Intent(getContext(), ProjectAgapayActivity.class));
+                        break;
+                    case "CALagapay":
+                        startActivity(new Intent(getContext(), CALagapay.class));
+                        break;
+                    case "ReSSCue":
+                        startActivity(new Intent(getContext(), reSSCue.class));
+                        break;
+                    case "eSSCentials":
+                        startActivity(new Intent(getContext(), eSSCentials.class));
+                        break;
+                    case "Zoom Connect":
+                        startActivity(new Intent(getContext(), ZoomConnect.class));
+                        break;
+                }
+            }
+        });
     }
 }
+
