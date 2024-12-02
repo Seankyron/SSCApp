@@ -26,8 +26,4 @@
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textStyle">bold</item>
     </style>
-
-
-
-
 </resources>

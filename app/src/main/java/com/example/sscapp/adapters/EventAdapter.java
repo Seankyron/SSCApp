@@ -20,10 +20,14 @@ import com.example.sscapp.models.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private List<Event> events = new ArrayList<>();
-    private Date currentDate = new Date();
 
     public EventAdapter() {
         this.events = getEvents();
+        Log.d("EventAdapter", "Initialized with " + events.size() + " events");
+        for (Event event : events) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Log.d("EventAdapter", "Event: " + event.getTitle() + " on " + sdf.format(event.getDate()));
+        }
     }
 
     @NonNull
@@ -114,6 +118,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     public List<Event> getEventsForDate(Date date) {
+        Log.d("EventDebug", "getEventsForDate called with " + events.size() + " total events");
         List<Event> eventsForDate = new ArrayList<>();
         Calendar selectedCalendar = Calendar.getInstance();
         selectedCalendar.setTime(date);
@@ -122,7 +127,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         selectedCalendar.set(Calendar.SECOND, 0);
         selectedCalendar.set(Calendar.MILLISECOND, 0);
 
-        for (Event event : events) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Log.d("EventDebug", "Checking events for date: " + sdf.format(selectedCalendar.getTime()));
+
+        for (Event event : getEvents()) {
             Calendar eventCalendar = Calendar.getInstance();
             eventCalendar.setTime(event.getDate());
             eventCalendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -130,11 +138,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventCalendar.set(Calendar.SECOND, 0);
             eventCalendar.set(Calendar.MILLISECOND, 0);
 
-            if (selectedCalendar.getTimeInMillis() == eventCalendar.getTimeInMillis()) {
+            Log.d("EventDebug", "Comparing with event: " + event.getTitle() + " on " + sdf.format(eventCalendar.getTime()));
+
+            if (selectedCalendar.get(Calendar.YEAR) == eventCalendar.get(Calendar.YEAR) &&
+                    selectedCalendar.get(Calendar.MONTH) == eventCalendar.get(Calendar.MONTH) &&
+                    selectedCalendar.get(Calendar.DAY_OF_MONTH) == eventCalendar.get(Calendar.DAY_OF_MONTH)) {
                 eventsForDate.add(event);
+                Log.d("EventDebug", "Match found: " + event.getTitle());
             }
         }
 
+        Log.d("EventDebug", "Total events found for " + sdf.format(selectedCalendar.getTime()) + ": " + eventsForDate.size());
         return eventsForDate;
     }
 
@@ -144,7 +158,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         private TextView dateTextView;
         private ImageView eventImage;
         private TextView eventType;
-        private TextView eventCategory;
 
         EventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,7 +166,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             dateTextView = itemView.findViewById(R.id.eventDate);
             eventImage = itemView.findViewById(R.id.eventImage);
             eventType = itemView.findViewById(R.id.eventType);
-            eventCategory = itemView.findViewById(R.id.eventCategory);
         }
 
         void bind(Event event) {
@@ -165,7 +177,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
             eventImage.setImageResource(event.getIconResource());
             eventType.setText(event.getEventType().name());
-            eventCategory.setText(event.getEventType().name());
         }
     }
 }

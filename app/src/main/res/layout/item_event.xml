@@ -2,26 +2,38 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="360dp"
-    android:layout_height="380dp"
-    android:layout_margin="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="5dp"
+    app:cardElevation="4dp"
     app:strokeWidth="0dp"
     app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/eventImage"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
+            android:backgroundTint="@color/gray_light"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_overlay"
+            app:layout_constraintTop_toTopOf="@id/eventImage"
+            app:layout_constraintBottom_toBottomOf="@id/eventImage"
+            app:layout_constraintStart_toStartOf="@id/eventImage"
+            app:layout_constraintEnd_toEndOf="@id/eventImage" />
 
         <TextView
             android:id="@+id/eventType"
@@ -32,62 +44,68 @@
             android:textAllCaps="true"
             android:paddingHorizontal="12dp"
             android:paddingVertical="4dp"
-            android:layout_margin="16dp"
             android:background="@drawable/background_announcement_type"
-            app:layout_constraintTop_toBottomOf="@id/eventImage"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/eventCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/text_secondary"
             android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/eventImage"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="WORKSHOP" />
 
         <TextView
             android:id="@+id/eventTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
             android:maxLines="2"
             android:ellipsize="end"
-            app:layout_constraintTop_toBottomOf="@id/eventType"
+            app:layout_constraintBottom_toBottomOf="@id/eventImage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Event Title Goes Here" />
 
         <TextView
             android:id="@+id/eventDescription"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="8dp"
-            android:maxLines="4"
+            android:maxLines="3"
             android:ellipsize="end"
-            app:layout_constraintTop_toBottomOf="@id/eventTitle"
+            app:layout_constraintTop_toBottomOf="@id/eventImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/eventDate" />
+            tools:text="This is a sample event description that spans multiple lines to showcase the layout." />
+
+        <ImageView
+            android:id="@+id/calendarIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_calendar"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/eventDescription"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/text_secondary" />
 
         <TextView
             android:id="@+id/eventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/text_secondary"
-            android:layout_margin="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/calendarIcon"
+            app:layout_constraintTop_toTopOf="@id/calendarIcon"
+            app:layout_constraintBottom_toBottomOf="@id/calendarIcon"
+            tools:text="May 15, 2023" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

@@ -52,7 +52,7 @@
             android:name=".OfficersFragment"
             android:exported="false" />
         <activity
-            android:name=".fragments.EventsFragment"
+            android:name=".EventsFragment"
             android:exported="false" />
         <activity
             android:name=".StoreFragment"
