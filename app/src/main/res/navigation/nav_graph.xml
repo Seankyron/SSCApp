@@ -86,5 +86,11 @@
         android:id="@+id/action_global_cartFragment"
         app:destination="@id/cartFragment" />
 
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.sscapp.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
+
 </navigation>
 

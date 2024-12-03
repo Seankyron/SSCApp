@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="The Student Supreme Council (SSC) is the supreme student government body of the university, representing and serving the student body."
                     android:textColor="@color/text_primary"
-                    android:textAlignment="center"/>
+                   />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -68,7 +68,42 @@
                     android:text="Adviser"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
+                    android:textColor="@color/red_primary"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="President"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/red_primary"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Executive Vice President"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/red_primary"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="VP SDG Alangilan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/red_primary"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Secretary General"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/red_primary"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Finance Officer"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:textColor="@color/red_primary"/>
 
             </LinearLayout>

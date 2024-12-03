@@ -7,6 +7,10 @@
         <item name="boxBackgroundColor">@color/white</item>
     </style>
 
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/red_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+    </style>
     <!-- Style for fully booked dates - use red_primary color -->
     <style name="FullyBookedDateStyle" parent="android:TextAppearance.DeviceDefault.Small">
         <item name="android:textColor">@color/red_primary</item>

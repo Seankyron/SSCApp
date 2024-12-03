@@ -40,7 +40,8 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 android:layout_marginHorizontal="4dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginVertical="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,6 +77,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="4dp"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
@@ -98,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:text="• Reserve your Zoom meeting at least one day before the required date\n• Reservations are available from 8:00 AM to 5:00 PM\n• Admin will verify and confirm your reservation\n• You will be notified once your reservation is confirmed"
                         android:textSize="16sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text_secondary"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -109,6 +111,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                android:layout_marginVertical="4dp"
                 app:cardBackgroundColor="@color/white"
                 android:layout_marginHorizontal="4dp">
 
@@ -130,10 +133,12 @@
                     <CalendarView
                         android:id="@+id/zoomCalendarView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:focusedMonthDateColor="@color/black"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:theme="@style/CalenderViewCustom"
                         android:dateTextAppearance="@style/CalendarViewDateCustomText"
-                        android:weekDayTextAppearance="@style/CalendarViewWeekCustomText"/>
+                        android:weekDayTextAppearance="@style/CalendarViewWeekCustomText"
+                       />/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <!-- Time Slot Selection Card -->
@@ -144,6 +149,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/white"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
@@ -196,6 +202,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/white"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout

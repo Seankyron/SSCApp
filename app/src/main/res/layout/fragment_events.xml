@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:theme="@style/CalenderViewCustom"
-            android:dateTextAppearance="@style/CalenderViewDateCustomText"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+            android:dateTextAppearance="@style/CalendarViewDateCustomText"
+            android:weekDayTextAppearance="@style/CalendarViewWeekCustomText"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

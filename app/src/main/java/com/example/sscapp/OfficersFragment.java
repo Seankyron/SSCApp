@@ -32,7 +32,7 @@ public class OfficersFragment extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("Current Officers");
+                    tab.setText("Officers");
                     break;
                 case 1:
                     tab.setText("Org Structure");

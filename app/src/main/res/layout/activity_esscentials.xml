@@ -40,7 +40,8 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/white"
-                android:layout_marginHorizontal="4dp">
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,6 +76,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
@@ -87,7 +89,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Select Equipment to Borrow"
+                        android:text="Select Equipment"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
@@ -215,6 +217,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
@@ -265,6 +268,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
+                android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="4dp">
 
                 <LinearLayout
@@ -277,7 +281,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date to be Used"
+                        android:text="Date of Claiming"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
@@ -315,7 +319,8 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/red_primary"
-                android:layout_marginHorizontal="4dp">
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
