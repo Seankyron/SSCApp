@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
     private RecyclerView announcementsRecyclerView;
     private LinearLayout quickAccessContainer;
     private RecyclerView servicesRecyclerView;
-    private List<Announcement> announcements;
+    private List<Announcement> pinnedAnnouncements;
     private Handler autoScrollHandler;
     private int currentAnnouncementPosition = 0;
 
@@ -71,19 +71,22 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
         stopAutoScroll();
     }
 
-    private void setupAnnouncements() {
-        announcements = new ArrayList<>();
-        announcements.add(new Announcement(1, "Membership Payment Deadline",
-                "Last day of payment is on November 30, 2024", "urgent",
-                "Deadline", "SSC Treasury", "/api/placeholder/800/400"));
-        announcements.add(new Announcement(2, "Take Off V.4.0",
-                "First Year Student Orientation on August 15-16, 2024", "important",
-                "Event", "SSC Events Committee", "/api/placeholder/800/400"));
-        announcements.add(new Announcement(3, "Froshie Fair V.6.0",
-                "Join us on September 30, 2024", "important",
-                "Event", "SSC Events Committee", "/api/placeholder/800/400"));
+    private List<Announcement> getAnnouncementsFromUpdatesFragment() {
+        UpdatesFragment updatesFragment = new UpdatesFragment();
+        return updatesFragment.getAnnouncements();
+    }
 
-        AnnouncementsAdapter adapter = new AnnouncementsAdapter(announcements);
+    private void setupAnnouncements() {
+        List<Announcement> allAnnouncements = getAnnouncementsFromUpdatesFragment();
+        pinnedAnnouncements = new ArrayList<>();
+
+        for (Announcement announcement : allAnnouncements) {
+            if (announcement.isPinnedAttachment()) {
+                pinnedAnnouncements.add(announcement);
+            }
+        }
+
+        AnnouncementsAdapter adapter = new AnnouncementsAdapter(pinnedAnnouncements);
 
         CarouselLayoutManager layoutManager = new CarouselLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -99,7 +102,7 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
 
         adapter.setItemCount(Integer.MAX_VALUE);
 
-        int firstAnnouncementPosition = INITIAL_POSITION - (INITIAL_POSITION % announcements.size());
+        int firstAnnouncementPosition = INITIAL_POSITION - (INITIAL_POSITION % pinnedAnnouncements.size());
         announcementsRecyclerView.scrollToPosition(firstAnnouncementPosition);
         currentAnnouncementPosition = firstAnnouncementPosition;
 

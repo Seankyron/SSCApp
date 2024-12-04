@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="2dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    android:backgroundTint="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:layout_height="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_primary"
             tools:src="@drawable/ic_event"/>
 
         <TextView
@@ -28,6 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/text_primary"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/updateTypeIcon"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,12 +41,12 @@
             android:id="@+id/updateDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:maxLines="2"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:textAlignment="gravity"
             android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/updateTitle"
             app:layout_constraintTop_toBottomOf="@id/updateTitle"
             tools:text="This is a brief description of the update. It can span multiple lines but will be limited to two lines maximum."/>
 
@@ -50,10 +54,10 @@
             android:id="@+id/updateCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:textAppearance="?attr/textAppearanceCaption"
             android:textColor="?attr/colorSecondary"
-            app:layout_constraintStart_toStartOf="@id/updateTitle"
+            android:textSize="10sp"
             app:layout_constraintTop_toBottomOf="@id/updateDescription"
             tools:text="Category"/>
 
@@ -62,7 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="?attr/colorOnSurface"
+            android:textSize="10sp"
+            android:textColor="@color/text_secondary"
             android:alpha="0.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/updateCategory"

@@ -50,7 +50,7 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdateVi
         private TextView updateTitle;
         private TextView updateDescription;
         private TextView updateCategory;
-        private TextView updateAuthor;
+        private TextView updateDate;
         private MaterialCardView cardView;
 
         UpdateViewHolder(@NonNull View itemView) {
@@ -59,7 +59,7 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdateVi
             updateTitle = itemView.findViewById(R.id.updateTitle);
             updateDescription = itemView.findViewById(R.id.updateDescription);
             updateCategory = itemView.findViewById(R.id.updateCategory);
-            updateAuthor = itemView.findViewById(R.id.updateDate);
+            updateDate = itemView.findViewById(R.id.updateDate);
             cardView = (MaterialCardView) itemView;
         }
 
@@ -67,7 +67,7 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdateVi
             updateTitle.setText(announcement.getTitle());
             updateDescription.setText(announcement.getDescription());
             updateCategory.setText(announcement.getCategory());
-            updateAuthor.setText(announcement.getAuthor());
+            updateDate.setText(announcement.getDate());
 
             // Set the icon based on the announcement category
             int iconResId;
@@ -89,25 +89,6 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdateVi
                     break;
             }
             updateTypeIcon.setImageResource(iconResId);
-
-            // Set card background color based on announcement type
-            int backgroundColorResId;
-            switch (announcement.getType().toLowerCase()) {
-                case "urgent":
-                    backgroundColorResId = R.color.red_primary;
-                    break;
-                case "important":
-                    backgroundColorResId = R.color.yellow_dark;
-                    break;
-                default:
-                    backgroundColorResId = R.color.green;
-                    break;
-            }
-            cardView.setCardBackgroundColor(itemView.getContext().getResources().getColor(backgroundColorResId));
-
-            // Load image using Picasso
-            Picasso.get().load(announcement.getImage()).into(updateTypeIcon);
         }
     }
 }
-

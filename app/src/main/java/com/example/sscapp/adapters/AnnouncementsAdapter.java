@@ -42,7 +42,6 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
         holder.description.setText(announcement.getDescription());
         holder.type.setText(announcement.getType().toUpperCase());
         holder.category.setText(announcement.getCategory());
-        holder.author.setText(announcement.getAuthor());
 
         // Set type badge background color based on announcement type
         int backgroundColor;
@@ -73,7 +72,6 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
 
         // Set category and author text colors
         holder.category.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.text_secondary));
-        holder.author.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.text_secondary));
 
         Picasso.get().load(announcement.getImage()).into(holder.image);
     }
@@ -93,7 +91,6 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
             description = itemView.findViewById(R.id.announcementDescription);
             type = itemView.findViewById(R.id.announcementType);
             category = itemView.findViewById(R.id.announcementCategory);
-            author = itemView.findViewById(R.id.announcementAuthor);
             image = itemView.findViewById(R.id.announcementImage);
         }
     }

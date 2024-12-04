@@ -34,7 +34,7 @@ public class EventsFragment extends Fragment {
     private CalendarView calendarView;
     private TextView noEventsText;
     private Button toggleCalendarButton;
-    private ConstraintLayout calendarContainer; // Updated class variable
+    private ConstraintLayout calendarContainer;
 
 
     public EventsFragment() {
@@ -67,7 +67,7 @@ public class EventsFragment extends Fragment {
         calendarView = view.findViewById(R.id.calendarView);
         noEventsText = view.findViewById(R.id.noEventsText);
         toggleCalendarButton = view.findViewById(R.id.toggleCalendarButton);
-        calendarContainer = view.findViewById(R.id.calendarContainer); // Updated initializeViews method
+        calendarContainer = view.findViewById(R.id.calendarContainer);
     }
 
     private void setupRecyclerView() {
@@ -95,7 +95,7 @@ public class EventsFragment extends Fragment {
     }
 
     private void toggleCalendarVisibility() {
-        if (calendarContainer.getVisibility() == View.GONE) { // Updated toggleCalendarVisibility method
+        if (calendarContainer.getVisibility() == View.GONE) {
             calendarContainer.setVisibility(View.VISIBLE);
             toggleCalendarButton.setText("HIDE CALENDAR");
         } else {
@@ -128,7 +128,7 @@ public class EventsFragment extends Fragment {
         // Update adapter and handle empty state
         eventAdapter.setEvents(eventsForDate);
 
-        if (eventsForDate.isEmpty()) { // Updated updateEventsForDate method
+        if (eventsForDate.isEmpty()) {
             eventsRecyclerView.setVisibility(View.GONE);
             noEventsText.setVisibility(View.VISIBLE);
         } else {
