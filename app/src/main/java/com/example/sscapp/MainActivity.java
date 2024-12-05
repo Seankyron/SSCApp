@@ -1,5 +1,6 @@
 package com.example.sscapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,6 +59,19 @@ public class MainActivity extends AppCompatActivity {
         // Initialize DrawerLayout and NavigationView
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View logoutSection = navigationView.findViewById(R.id.logout_section);
+        logoutSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform logout actions here (e.g., clear session, user data, etc.)
+                // Then navigate back to LoginActivity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         profileIcon.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(navigationView)) {
@@ -194,13 +208,4 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.updatesFragment, R.id.storeFragment,
-                R.id.eventsFragment, R.id.officersFragment
-        ).build()) || super.onSupportNavigateUp();
-    }
-}
+    }}
