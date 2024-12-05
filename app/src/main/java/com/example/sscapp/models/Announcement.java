@@ -57,4 +57,12 @@ public class Announcement {
     public String getDate() {
         return date;
     }
+
+    public void setPinnedAttachment(boolean isPinnedAttachment) {
+        this.isPinnedAttachment = isPinnedAttachment;
+    }
+
+    public void togglePinned() {
+        this.isPinnedAttachment = !this.isPinnedAttachment;
+    }
 }

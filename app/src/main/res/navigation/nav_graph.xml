@@ -92,5 +92,26 @@
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <!-- New Admin fragments -->
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.example.sscapp.AdminHomeFragment"
+        android:label="Admin Home"
+        tools:layout="@layout/admin_fragment_home">
+        <action
+            android:id="@+id/action_adminHomeFragment_to_adminUpdatesFragment"
+            app:destination="@id/adminUpdatesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminUpdatesFragment"
+        android:name="com.example.sscapp.AdminUpdatesFragment"
+        android:label="Admin Updates"
+        tools:layout="@layout/admin_fragment_updates">
+        <action
+            android:id="@+id/action_adminUpdatesFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
+
 </navigation>
 

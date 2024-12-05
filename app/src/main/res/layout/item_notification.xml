@@ -62,14 +62,5 @@
                 android:textColor="@android:color/darker_gray"/>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/notification_more_options"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_more_vert"
-            android:layout_marginStart="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

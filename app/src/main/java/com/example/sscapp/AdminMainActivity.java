@@ -1,6 +1,5 @@
 package com.example.sscapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class AdminMainActivity extends AppCompatActivity {
     private NavController navController;
     private Menu optionsMenu;
     private TextView toolbarTitle;
@@ -30,16 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        int admin = 1;
-        if (admin == 1) {
-            Intent adminIntent = new Intent(this, AdminMainActivity.class);
-            startActivity(adminIntent);
-            finish();
-        } else {
-            setContentView(R.layout.activity_main);
-            // Your existing code for regular users
-        }
+        setContentView(R.layout.activity_admin_main);
 
         // Setup Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -69,19 +59,6 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        View logoutSection = navigationView.findViewById(R.id.logout_section);
-        logoutSection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Perform logout actions here (e.g., clear session, user data, etc.)
-                // Then navigate back to LoginActivity
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         profileIcon.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(navigationView)) {
                 drawerLayout.closeDrawer(navigationView);
@@ -102,16 +79,13 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.homeFragment);
                 return true;
             } else if (itemId == R.id.updates) {
-                navController.navigate(R.id.updatesFragment);
+                navController.navigate(R.id.adminUpdatesFragment);
                 return true;
             } else if (itemId == R.id.store) {
                 navController.navigate(R.id.storeFragment);
                 return true;
             } else if (itemId == R.id.events) {
                 navController.navigate(R.id.eventsFragment);
-                return true;
-            } else if (itemId == R.id.officers) {
-                navController.navigate(R.id.officersFragment);
                 return true;
             }
             return false;
@@ -120,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupActionBarNavigation() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.updatesFragment, R.id.storeFragment,
-                R.id.eventsFragment, R.id.officersFragment
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
+                R.id.eventsFragment
         ).build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -151,10 +125,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int getTitleForDestination(int destinationId) {
         if (destinationId == R.id.homeFragment) return R.string.menu_home;
-        if (destinationId == R.id.updatesFragment) return R.string.menu_updates;
+        if (destinationId == R.id.adminUpdatesFragment) return R.string.menu_updates;
         if (destinationId == R.id.storeFragment) return R.string.menu_store;
         if (destinationId == R.id.eventsFragment) return R.string.menu_events;
-        if (destinationId == R.id.officersFragment) return R.string.menu_officers;
         if (destinationId == R.id.cartFragment) return R.string.menu_cart;
         if (destinationId == R.id.notificationsFragment) return R.string.menu_notifications;
         return 0;
@@ -174,9 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isHomeRelatedFragment(int fragmentId) {
         return fragmentId == R.id.homeFragment
-                || fragmentId == R.id.updatesFragment
-                || fragmentId == R.id.eventsFragment
-                || fragmentId == R.id.officersFragment;
+                || fragmentId == R.id.adminUpdatesFragment
+                || fragmentId == R.id.eventsFragment;
     }
 
     private boolean isStoreRelatedFragment(int fragmentId) {
@@ -186,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_app_bar, menu);
+        getMenuInflater().inflate(R.menu.admin_top_app_bar, menu);
         optionsMenu = menu;
         return true;
     }
@@ -206,4 +178,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }}
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
+                R.id.eventsFragment
+        ).build()) || super.onSupportNavigateUp();
+    }
+}
