@@ -1,6 +1,7 @@
 package com.example.sscapp;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,11 +16,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.sscapp.models.PrintRequest;
-import com.example.sscapp.utils.FileUtils;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,7 +43,7 @@ public class ProjectAgapayActivity extends AppCompatActivity {
             uri -> {
                 if (uri != null) {
                     selectedFileUri = uri;
-                    String fileName = FileUtils.getFileName(this, uri);
+                    String fileName = selectedFileUri.getLastPathSegment();
                     fileNameTextView.setText(fileName);
                     fileNameTextView.setVisibility(View.VISIBLE);
                 }
@@ -70,7 +72,6 @@ public class ProjectAgapayActivity extends AppCompatActivity {
         remarksEditText = findViewById(R.id.remarksEditText);
         submitPrintRequestButton = findViewById(R.id.submitPrintRequestButton);
 
-        // Set up paper size dropdown
         String[] paperSizes = {"A4", "Letter", "Legal"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, paperSizes);
         paperSizeDropdown.setAdapter(adapter);
@@ -93,41 +94,96 @@ public class ProjectAgapayActivity extends AppCompatActivity {
 
     private void submitPrintRequest() {
         if (validateForm()) {
-            PrintRequest request = new PrintRequest(
-                    selectedFileUri,
-                    paperSizeDropdown.getText().toString(),
-                    Integer.parseInt(numberOfCopiesEditText.getText().toString()),
-                    dateOfClaimingEditText.getText().toString(),
-                    remarksEditText.getText().toString()
+            String apiUrl = "http://192.168.1.5:5000/api/admin/projectagapay";
+
+            // Default values for sr code, name, and program
+            String srcode = "22-01122";
+            String name = "Mico Raphael F. Cuarto";
+            String program = "BSCS";
+
+            // Retrieve other form inputs
+            String paperSize = paperSizeDropdown.getText().toString();
+            String numberOfCopies = numberOfCopiesEditText.getText().toString();
+            String dateOfClaiming = dateOfClaimingEditText.getText().toString();
+            String remarks = remarksEditText.getText().toString();
+
+            // Create the JSON payload
+            String requestBody = String.format(
+                    "{\"srcode\":\"%s\",\"name\":\"%s\",\"program\":\"%s\",\"fileName\":\"%s\",\"paperSize\":\"%s\",\"numberOfCopies\":%s,\"dateOfClaiming\":\"%s\",\"remarks\":\"%s\"}",
+                    srcode, name, program, fileNameTextView.getText().toString(), paperSize, numberOfCopies, dateOfClaiming, remarks
             );
 
-            // TODO: Send the print request to your backend or process it locally
-            Toast.makeText(this, "Print request submitted successfully", Toast.LENGTH_SHORT).show();
-            finish();
+            // Execute the AsyncTask to send the request
+            new SubmitPrintRequestTask().execute(apiUrl, requestBody);
+            Toast.makeText(this, "Request sent.", Toast.LENGTH_SHORT).show();
+
+            // Clear all form fields
+            fileNameTextView.setText("");
+            paperSizeDropdown.setText("");
+            numberOfCopiesEditText.setText("");
+            dateOfClaimingEditText.setText("");
+            remarksEditText.setText("");
         }
     }
+
 
     private boolean validateForm() {
         if (selectedFileUri == null) {
             Toast.makeText(this, "Please upload a file", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         if (paperSizeDropdown.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please select a paper size", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         if (numberOfCopiesEditText.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter the number of copies", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         if (dateOfClaimingEditText.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please select a claiming date", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
+    }
+
+    // AsyncTask to handle the API request
+    private static class SubmitPrintRequestTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String apiUrl = params[0];
+            String requestBody = params[1];
+
+            HttpURLConnection connection = null;
+
+            try {
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                // Send the request body
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(requestBody);
+                writer.flush();
+                writer.close();
+
+                // Get the response code
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    return "Request submitted successfully.";
+                } else {
+                    return "Failed to submit the request. Response code: " + responseCode;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error: " + e.getMessage();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
     }
 }

@@ -1,11 +1,20 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 exports.registerUser = async (req, res) => {
-  const { name, srCode, yearLevel, program, email, password } = req.body;
+  const { name, contactNumber, srCode, departmentName, yearLevel, program, email, password } = req.body;
   try {
-    const user = new User({ name, srCode, yearLevel, program, email, password });
+    const user = new User({
+      name,
+      contactNumber,
+      srCode,
+      departmentName,
+      yearLevel,
+      program,
+      email,
+      password
+    });
     await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
@@ -18,8 +27,16 @@ exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (user && (await bcrypt.compare(password, user.password))) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      res.json({
+        id: user._id,
+        name: user.name,
+        contactNumber: user.contactNumber,
+        srCode: user.srCode,
+        departmentName: user.departmentName,
+        yearLevel: user.yearLevel,
+        program: user.program,
+        email: user.email
+      });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -27,3 +44,4 @@ exports.loginUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+

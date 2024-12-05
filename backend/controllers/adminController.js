@@ -55,18 +55,36 @@ exports.addCalagapay = async (req, res) => {
   }
 };
 
-// Add Project Agapay (printing services)
 exports.addAgapay = async (req, res) => {
-  const { srcode, name, program, fileName } = req.body;
+  const { srcode, name, program, fileName, paperSize, numberOfCopies, dateOfClaiming, remarks } = req.body;
 
-  if (!srcode || !name || !program || !fileName) {
-    return res.status(400).json({ error: 'All fields are required' });
+  if (!srcode || !name || !program || !fileName || !paperSize || !numberOfCopies || !dateOfClaiming) {
+    return res.status(400).json({ error: 'All required fields must be filled' });
   }
 
   try {
-    const agapay = new Agapay({ srcode, name, program, fileName });
+    const agapay = new Agapay({
+      srcode,
+      name,
+      program,
+      fileName,
+      paperSize,
+      numberOfCopies,
+      dateOfClaiming,
+      remarks,
+    });
     await agapay.save();
     res.status(201).json({ message: 'Project Agapay entry added successfully', agapay });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Get all Project Agapay entries
+exports.getAgapayEntries = async (req, res) => {
+  try {
+    const entries = await Agapay.find();
+    res.status(200).json(entries);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
