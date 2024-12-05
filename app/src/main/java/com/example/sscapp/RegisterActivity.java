@@ -78,12 +78,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Create the JSON payload
             String requestBody = String.format(
-                    "{\"name\":\"%s\",\"contactNumber\":\"%s\",\"email\":\"%s\",\"srCode\":\"%s\",\"department\":\"%s\",\"program\":\"%s\",\"year\":\"%s\",\"password\":\"%s\"}",
+                    "{\"name\":\"%s\",\"contactNumber\":\"%s\",\"email\":\"%s\",\"srCode\":\"%s\",\"departmentName\":\"%s\",\"program\":\"%s\",\"yearLevel\":\"%s\",\"password\":\"%s\"}",
                     name, contactNumber, email, srCode, department, program, year, password
             );
 
             // Execute the AsyncTask to send the request
             new RegisterUserTask().execute(apiUrl, requestBody);
+            showToast("User Registered Successfully!");
+            clearForm();
         }
     }
 
@@ -190,19 +192,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-            if (result.startsWith("Success")) {
-                showToast("Registration successful");
-                clearForm();
-                // Navigate to LoginActivity
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                showToast(result);
-            }
-        }
     }
 }
 

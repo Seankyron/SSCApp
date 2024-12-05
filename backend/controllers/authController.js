@@ -27,8 +27,16 @@ exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (user && (await bcrypt.compare(password, user.password))) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      res.json({
+        id: user._id,
+        name: user.name,
+        contactNumber: user.contactNumber,
+        srCode: user.srCode,
+        departmentName: user.departmentName,
+        yearLevel: user.yearLevel,
+        program: user.program,
+        email: user.email
+      });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -36,3 +44,4 @@ exports.loginUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
