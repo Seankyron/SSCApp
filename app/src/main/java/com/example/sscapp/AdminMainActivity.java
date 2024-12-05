@@ -1,6 +1,5 @@
 package com.example.sscapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class AdminMainActivity extends AppCompatActivity {
     private NavController navController;
     private Menu optionsMenu;
     private TextView toolbarTitle;
@@ -30,15 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (true) {
-            Intent adminIntent = new Intent(this, com.example.sscapp.AdminMainActivity.class);
-            startActivity(adminIntent);
-            finish();
-        } else {
-            setContentView(R.layout.activity_main);
-            // Your existing code for regular users
-        }
+        setContentView(R.layout.activity_admin_main);
 
         // Setup Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
