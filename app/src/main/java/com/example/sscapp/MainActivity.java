@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (true) {
-            Intent adminIntent = new Intent(this, com.example.sscapp.AdminMainActivity.class);
+        int admin = 1;
+        if (admin == 1) {
+            Intent adminIntent = new Intent(this, AdminMainActivity.class);
             startActivity(adminIntent);
             finish();
         } else {

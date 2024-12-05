@@ -74,5 +74,13 @@ public class UpdatesFragment extends Fragment {
         announcements.add(new Announcement(4, "New Laboratory Equipment", "College of Engineering receives new state-of-the-art equipment", "Normal", "Campus News", "College of Engineering", "https://example.com/new-equipment.jpg", false, "2023-05-22"));
         return announcements;
     }
-}
 
+    public static List<Announcement> getStaticAnnouncements() {
+        List<Announcement> announcements = new ArrayList<>();
+        announcements.add(new Announcement(1, "University Week Celebration", "Join us for a week-long celebration filled with competitions, performances, and more!", "Important", "Event Updates", "Student Affairs Office", "https://example.com/university-week.jpg", true, "2023-05-15"));
+        announcements.add(new Announcement(2, "Dean's Lister Recognition Day", "Congratulations to all students who made it to the Dean's List!", "Important", "Academic Achievements", "Office of the Dean", "https://example.com/deans-list.jpg", false, "2023-05-20"));
+        announcements.add(new Announcement(3, "Class Suspension Advisory", "All classes are suspended today due to inclement weather.", "Urgent", "Weather Advisory", "Office of the President", "https://example.com/weather-advisory.jpg", true, "2023-05-18"));
+        announcements.add(new Announcement(4, "New Laboratory Equipment", "College of Engineering receives new state-of-the-art equipment", "Normal", "Campus News", "College of Engineering", "https://example.com/new-equipment.jpg", false, "2023-05-22"));
+        return announcements;
+    }
+}

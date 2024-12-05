@@ -28,9 +28,6 @@
             android:name=".CurrentOfficersFragment"
             android:exported="false" />
         <activity
-            android:name=".ContactInfoFragment"
-            android:exported="false" />
-        <activity
             android:name=".activities.ZoomConnect"
             android:exported="false" />
         <activity
@@ -68,6 +65,9 @@
             android:exported="false" />
         <activity
             android:name=".HomeFragment"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

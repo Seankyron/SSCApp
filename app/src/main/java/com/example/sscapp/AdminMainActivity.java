@@ -79,16 +79,13 @@ public class AdminMainActivity extends AppCompatActivity {
                 navController.navigate(R.id.homeFragment);
                 return true;
             } else if (itemId == R.id.updates) {
-                navController.navigate(R.id.updatesFragment);
+                navController.navigate(R.id.adminUpdatesFragment);
                 return true;
             } else if (itemId == R.id.store) {
                 navController.navigate(R.id.storeFragment);
                 return true;
             } else if (itemId == R.id.events) {
                 navController.navigate(R.id.eventsFragment);
-                return true;
-            } else if (itemId == R.id.officers) {
-                navController.navigate(R.id.officersFragment);
                 return true;
             }
             return false;
@@ -97,8 +94,8 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private void setupActionBarNavigation() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.updatesFragment, R.id.storeFragment,
-                R.id.eventsFragment, R.id.officersFragment
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
+                R.id.eventsFragment
         ).build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -128,10 +125,9 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private int getTitleForDestination(int destinationId) {
         if (destinationId == R.id.homeFragment) return R.string.menu_home;
-        if (destinationId == R.id.updatesFragment) return R.string.menu_updates;
+        if (destinationId == R.id.adminUpdatesFragment) return R.string.menu_updates;
         if (destinationId == R.id.storeFragment) return R.string.menu_store;
         if (destinationId == R.id.eventsFragment) return R.string.menu_events;
-        if (destinationId == R.id.officersFragment) return R.string.menu_officers;
         if (destinationId == R.id.cartFragment) return R.string.menu_cart;
         if (destinationId == R.id.notificationsFragment) return R.string.menu_notifications;
         return 0;
@@ -151,9 +147,8 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private boolean isHomeRelatedFragment(int fragmentId) {
         return fragmentId == R.id.homeFragment
-                || fragmentId == R.id.updatesFragment
-                || fragmentId == R.id.eventsFragment
-                || fragmentId == R.id.officersFragment;
+                || fragmentId == R.id.adminUpdatesFragment
+                || fragmentId == R.id.eventsFragment;
     }
 
     private boolean isStoreRelatedFragment(int fragmentId) {
@@ -163,7 +158,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_app_bar, menu);
+        getMenuInflater().inflate(R.menu.admin_top_app_bar, menu);
         optionsMenu = menu;
         return true;
     }
@@ -188,8 +183,8 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.updatesFragment, R.id.storeFragment,
-                R.id.eventsFragment, R.id.officersFragment
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
+                R.id.eventsFragment
         ).build()) || super.onSupportNavigateUp();
     }
 }
