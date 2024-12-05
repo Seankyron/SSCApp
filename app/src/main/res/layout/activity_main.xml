@@ -125,12 +125,13 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Drawer Content -->
+            <!-- Profile Details -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:backgroundTint="@color/white">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -138,7 +139,7 @@
                     android:text="Profile Details"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="8dp"/>
 
                 <TextView
                     android:id="@+id/tv_sr_code"
@@ -147,7 +148,7 @@
                     android:drawableStart="@drawable/ic_id_card"
                     android:drawablePadding="8dp"
                     android:text="SR Code: 12345678"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"/>
 
                 <TextView
                     android:id="@+id/tv_department"
@@ -156,23 +157,56 @@
                     android:drawableStart="@drawable/ic_department"
                     android:drawablePadding="8dp"
                     android:text="Department: Computer Science"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"/>
 
                 <TextView
-                    android:id="@+id/tv_year_program"
+                    android:id="@+id/tv_year"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_school"
                     android:drawablePadding="8dp"
-                    android:text="Year and Program: 3rd Year, BS Computer Science"
-                    android:layout_marginBottom="4dp" />
+                    android:text="Year: 3rd Year"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tv_program"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_school"
+                    android:drawablePadding="8dp"
+                    android:text="Program: BS Computer Science"
+                    android:layout_marginBottom="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/admin_view_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_admin"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Admin View"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <!-- Logout Section -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/white"/>
 
             <LinearLayout
                 android:id="@+id/logout_section"
@@ -188,14 +222,14 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_logout"
-                    android:layout_marginEnd="16dp" />
+                    android:layout_marginEnd="16dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Log Out"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>

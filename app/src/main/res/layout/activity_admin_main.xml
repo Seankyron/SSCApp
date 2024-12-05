@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="John Doe"
+                    android:text="Admin"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -120,53 +120,35 @@
                     android:id="@+id/tv_gsuite_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="johndoe@example.com"
+                    android:text="supremestudentcouncil@g.batstate-u.edu.ph"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Drawer Content -->
             <LinearLayout
+                android:id="@+id/user_view_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_admin"
+                    android:layout_marginEnd="16dp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile Details"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:id="@+id/tv_sr_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_id_card"
-                    android:drawablePadding="8dp"
-                    android:text="SR Code: 12345678"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tv_department"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_department"
-                    android:drawablePadding="8dp"
-                    android:text="Department: Computer Science"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tv_year_program"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_school"
-                    android:drawablePadding="8dp"
-                    android:text="Year and Program: 3rd Year, BS Computer Science"
-                    android:layout_marginBottom="4dp" />
+                    android:text="User View"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
+
 
             <!-- Logout Section -->
             <View

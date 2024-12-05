@@ -19,6 +19,9 @@
             android:name=".admin.AdminLostFoundActivity"
             android:exported="false" />
         <activity
+            android:name=".admin.AdminHomeFragment"
+            android:exported="false" />
+        <activity
             android:name=".admin.AdminZoomConnectActivity"
             android:exported="false" />
         <activity
@@ -43,9 +46,6 @@
             android:name=".admin.AdminUserManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.AdminDashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
@@ -53,7 +53,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

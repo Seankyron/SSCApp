@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:background="@color/white">
+                android:backgroundTint="@color/white">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/white"/>
 
             <LinearLayout
                 android:id="@+id/logout_section"

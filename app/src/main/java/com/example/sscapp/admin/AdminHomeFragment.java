@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,41 +26,36 @@ import com.example.sscapp.models.ServiceUsage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDashboardActivity extends AppCompatActivity implements QuickAccessAdapter.OnQuickLinkClickListener {
+public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.OnQuickLinkClickListener {
 
     private LinearLayout adminQuickAccessContainer;
     private RecyclerView adminServicesRecyclerView;
     private RecyclerView serviceUsageRecyclerView;
     private TextView tvTotalUsers, tvPaidMemberships;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_dashboard);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.admin_fragment_home, container, false);
 
-        // Setup Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         // Initialize Views
-        adminQuickAccessContainer = findViewById(R.id.admin_quickAccessContainer);
-        adminServicesRecyclerView = findViewById(R.id.admin_servicesRecyclerView);
-        serviceUsageRecyclerView = findViewById(R.id.service_usage_recycler);
-        tvTotalUsers = findViewById(R.id.tv_total_users);
-        tvPaidMemberships = findViewById(R.id.tv_paid_memberships);
+        adminQuickAccessContainer = view.findViewById(R.id.admin_quickAccessContainer);
+        adminServicesRecyclerView = view.findViewById(R.id.admin_servicesRecyclerView);
+        serviceUsageRecyclerView = view.findViewById(R.id.service_usage_recycler);
+        tvTotalUsers = view.findViewById(R.id.tv_total_users);
+        tvPaidMemberships = view.findViewById(R.id.tv_paid_memberships);
 
         // Initialize Dashboard Components
         setupUserStatistics();
         setupServiceUsageRecycler();
         setupAdminQuickAccess();
         setupAdminServices();
+
+        return view;
     }
 
     private void setupUserStatistics() {
-        // Corrected method to set total users and paid memberships
         tvTotalUsers.setText(String.valueOf(1245));
         tvPaidMemberships.setText(String.valueOf(876));
     }
@@ -71,9 +68,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements QuickAc
         serviceUsages.add(new ServiceUsage("eSSCentials", 189, R.drawable.ic_radio));
         serviceUsages.add(new ServiceUsage("ReSSCue", 166, R.drawable.ic_assistance));
 
-        ServiceUsageAdapter adapter = new ServiceUsageAdapter(this, serviceUsages);
+        ServiceUsageAdapter adapter = new ServiceUsageAdapter(requireContext(), serviceUsages);
         serviceUsageRecyclerView.setLayoutManager(
-                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         );
         serviceUsageRecyclerView.setAdapter(adapter);
     }
@@ -86,13 +83,12 @@ public class AdminDashboardActivity extends AppCompatActivity implements QuickAc
         quickLinks.add(new QuickLink("Lost and Found", R.drawable.ic_search, "/admin/lostFound", false));
         quickLinks.add(new QuickLink("Service Reports", R.drawable.ic_report, "/admin/service-reports", false));
 
-
-        LayoutInflater inflater = LayoutInflater.from(this);
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
         LinearLayout currentRow = null;
 
         for (int i = 0; i < quickLinks.size(); i++) {
             if (i % 2 == 0) {
-                currentRow = new LinearLayout(this);
+                currentRow = new LinearLayout(requireContext());
                 currentRow.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -126,19 +122,19 @@ public class AdminDashboardActivity extends AppCompatActivity implements QuickAc
 
         switch (quickLink.getLink()) {
             case "/admin/users":
-                intent = new Intent(this, AdminUserManagementActivity.class);
+                intent = new Intent(requireContext(), AdminUserManagementActivity.class);
                 break;
             case "/admin/service-reports":
-                intent = new Intent(this, AdminServiceReportsActivity.class);
+                intent = new Intent(requireContext(), AdminServiceReportsActivity.class);
                 break;
             case "/admin/lostFound":
-                intent = new Intent(this, AdminLostFoundActivity.class);
+                intent = new Intent(requireContext(), AdminLostFoundActivity.class);
                 break;
             case "/admin/analytics":
-                intent = new Intent(this, AdminAnalyticsActivity.class);
+                intent = new Intent(requireContext(), AdminAnalyticsActivity.class);
                 break;
             default:
-                Toast.makeText(this, "Feature not implemented", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Feature not implemented", Toast.LENGTH_SHORT).show();
                 return;
         }
 
@@ -155,8 +151,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements QuickAc
         services.add(new Service(4, "ReSSCue", "Cash Assistance Monitoring", R.drawable.ic_assistance, "Active"));
         services.add(new Service(5, "Zoom Connect", "Virtual Event Support", R.drawable.ic_meeting, "Active"));
 
-        ServicesAdapter adapter = new ServicesAdapter(this, services);
-        adminServicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ServicesAdapter adapter = new ServicesAdapter(requireContext(), services);
+        adminServicesRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adminServicesRecyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new ServicesAdapter.OnItemClickListener() {
@@ -164,22 +160,23 @@ public class AdminDashboardActivity extends AppCompatActivity implements QuickAc
             public void onItemClick(Service service) {
                 switch (service.getTitle()) {
                     case "Project Agapay":
-                        startActivity(new Intent(AdminDashboardActivity.this, AdminProjectAgapayActivity.class));
+                        startActivity(new Intent(requireContext(), AdminProjectAgapayActivity.class));
                         break;
                     case "CALagapay":
-                        startActivity(new Intent(AdminDashboardActivity.this, AdminCALagapayActivity.class));
+                        startActivity(new Intent(requireContext(), AdminCALagapayActivity.class));
                         break;
                     case "ReSSCue":
-                        startActivity(new Intent(AdminDashboardActivity.this, AdminReSSCueActivity.class));
+                        startActivity(new Intent(requireContext(), AdminReSSCueActivity.class));
                         break;
                     case "eSSCentials":
-                        startActivity(new Intent(AdminDashboardActivity.this, AdmineSSCentialsActivity.class));
+                        startActivity(new Intent(requireContext(), AdmineSSCentialsActivity.class));
                         break;
                     case "Zoom Connect":
-                        startActivity(new Intent(AdminDashboardActivity.this, AdminZoomConnectActivity.class));
+                        startActivity(new Intent(requireContext(), AdminZoomConnectActivity.class));
                         break;
                 }
             }
         });
     }
 }
+
