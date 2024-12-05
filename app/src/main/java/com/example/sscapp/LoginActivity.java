@@ -19,6 +19,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.example.sscapp.admin.AdminDashboardActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextLoginEmail;
@@ -119,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                 saveUserDetailsToSharedPreferences(userDetails);
 
                 showToast("Login successful!");
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                 startActivity(intent);
                 finish();
             } else {
