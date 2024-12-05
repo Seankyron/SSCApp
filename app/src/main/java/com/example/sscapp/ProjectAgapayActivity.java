@@ -115,6 +115,14 @@ public class ProjectAgapayActivity extends AppCompatActivity {
 
             // Execute the AsyncTask to send the request
             new SubmitPrintRequestTask().execute(apiUrl, requestBody);
+            Toast.makeText(this, "Request sent.", Toast.LENGTH_SHORT).show();
+
+            // Clear all form fields
+            fileNameTextView.setText("");
+            paperSizeDropdown.setText("");
+            numberOfCopiesEditText.setText("");
+            dateOfClaimingEditText.setText("");
+            remarksEditText.setText("");
         }
     }
 
