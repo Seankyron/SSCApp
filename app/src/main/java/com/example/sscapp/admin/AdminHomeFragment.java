@@ -79,7 +79,7 @@ public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.On
         List<QuickLink> quickLinks = new ArrayList<>();
 
         quickLinks.add(new QuickLink("User Management", R.drawable.ic_users, "/admin/users", false));
-        quickLinks.add(new QuickLink("Payment Tracking", R.drawable.ic_payment, "/admin/payments", false));
+        quickLinks.add(new QuickLink("Membership Tracking", R.drawable.ic_payment, "/admin/payments", false));
         quickLinks.add(new QuickLink("Lost and Found", R.drawable.ic_search, "/admin/lostFound", false));
         quickLinks.add(new QuickLink("Service Reports", R.drawable.ic_report, "/admin/service-reports", false));
 
@@ -130,8 +130,8 @@ public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.On
             case "/admin/lostFound":
                 intent = new Intent(requireContext(), AdminLostFoundActivity.class);
                 break;
-            case "/admin/analytics":
-                intent = new Intent(requireContext(), AdminAnalyticsActivity.class);
+            case "/admin/payments":
+                intent = new Intent(requireContext(), AdminMembershipActivity.class);
                 break;
             default:
                 Toast.makeText(requireContext(), "Feature not implemented", Toast.LENGTH_SHORT).show();

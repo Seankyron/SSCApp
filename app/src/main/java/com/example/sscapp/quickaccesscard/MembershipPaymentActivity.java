@@ -1,13 +1,13 @@
 package com.example.sscapp.quickaccesscard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +50,34 @@ public class MembershipPaymentActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updatePaymentStatus();
+    }
+
+    private void updatePaymentStatus() {
+        String referenceNumber = referenceNumberEditText.getText().toString();
+        if (!referenceNumber.isEmpty()) {
+            SharedPreferences prefs = getSharedPreferences("UserPayments", MODE_PRIVATE);
+            String status = prefs.getString(referenceNumber + "_status", "Pending");
+            updateStatusDisplay(status);
+        }
+    }
+
+    private void updateStatusDisplay(String status) {
+        if ("Verified".equals(status)) {
+            statusTextView.setText("Verified");
+            statusTextView.setTextColor(getResources().getColor(R.color.green));
+            submitButton.setEnabled(false);
+            uploadReceiptButton.setEnabled(false);
+            referenceNumberEditText.setEnabled(false);
+        } else {
+            statusTextView.setText("Pending");
+            statusTextView.setTextColor(getResources().getColor(R.color.yellow));
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
@@ -89,18 +117,21 @@ public class MembershipPaymentActivity extends AppCompatActivity {
         }
 
         isSubmitted = true;
-        statusTextView.setText("Waiting for confirmation");
-        statusTextView.setTextColor(getResources().getColor(R.color.yellow));
+        updateStatusDisplay("Pending");
         submitButton.setEnabled(false);
         uploadReceiptButton.setEnabled(false);
         referenceNumberEditText.setEnabled(false);
 
-        new Handler().postDelayed(() -> {
-            statusTextView.setText("Verified");
-            statusTextView.setTextColor(getResources().getColor(R.color.green));
-        }, 5000);
+        // In a real application, you would send the payment information to a server here
+        // For this example, we'll just simulate the process with a delay
 
-        Toast.makeText(this, "Payment submitted for verification", Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(() -> {
+            // Simulate server response
+            SharedPreferences prefs = getSharedPreferences("UserPayments", MODE_PRIVATE);
+            prefs.edit().putString(referenceNumber + "_status", "Pending").apply();
+
+            Toast.makeText(this, "Payment submitted for verification", Toast.LENGTH_LONG).show();
+        }, 2000);
     }
 }
 
