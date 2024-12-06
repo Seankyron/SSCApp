@@ -38,22 +38,37 @@ exports.addLostAndFound = async (req, res) => {
   }
 };
 
-// Add Calagapay (calculator lending program)
 exports.addCalagapay = async (req, res) => {
-  const { srcode, name, program, dateOfBorrowing, dateOfReturn } = req.body;
-
-  if (!srcode || !name || !program || !dateOfBorrowing || !dateOfReturn) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
+  const {
+    srCode,
+    name,
+    program,
+    calculatorNumber, // New field
+    purposeOfBorrowing, // New field
+    dateOfBorrowing,
+    dateOfReturn,
+  } = req.body;
 
   try {
-    const calagapay = new Calagapay({ srcode, name, program, dateOfBorrowing, dateOfReturn });
+    const calagapay = new Calagapay({
+      srCode,
+      name,
+      program,
+      calculatorNumber, // Added to the model
+      purposeOfBorrowing, // Added to the model
+      dateOfBorrowing,
+    });
+
     await calagapay.save();
-    res.status(201).json({ message: 'Calagapay entry added successfully', calagapay });
+    res.status(201).json({
+      message: 'Calagapay entry added successfully',
+      calagapay,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 exports.addAgapay = async (req, res) => {
   const { srcode, name, program, fileName, paperSize, numberOfCopies, dateOfClaiming, remarks } = req.body;
@@ -92,17 +107,25 @@ exports.getAgapayEntries = async (req, res) => {
 
 // Add ESSCential (sound system program)
 exports.addESSCential = async (req, res) => {
-  const { srcode, name, program, deviceNeeded, dateOfBorrowing, dateOfReturn } = req.body;
-
-  if (!srcode || !name || !program || !deviceNeeded || !dateOfBorrowing || !dateOfReturn) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
+  const { srCode, name, program, deviceNeeded, purpose, date } = req.body;
 
   try {
-    const essCential = new ESSCential({ srcode, name, program, deviceNeeded, dateOfBorrowing, dateOfReturn });
+    // Create a new ESSCential entry
+    const essCential = new ESSCential({
+      srCode,
+      name,
+      program,
+      deviceNeeded,
+      purpose,
+      date: new Date(date),
+    });
+
+    // Save the entry to the database
     await essCential.save();
     res.status(201).json({ message: 'ESSCential entry added successfully', essCential });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+

@@ -5,8 +5,8 @@ const ESSCentialSchema = new mongoose.Schema({
   name: { type: String, required: true },
   program: { type: String, required: true },
   deviceNeeded: { type: String, required: true },
-  dateOfBorrowing: { type: Date, required: true },
-  dateOfReturn: { type: Date, required: true },
+  purpose: { type: String, required: true },
+  date: { type: Date, required: true },
 });
 
 module.exports = mongoose.model('ESSCentialKit', ESSCentialSchema);
