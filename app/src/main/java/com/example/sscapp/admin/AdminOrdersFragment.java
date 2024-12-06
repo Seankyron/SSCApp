@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,8 @@ public class AdminOrdersFragment extends Fragment {
     private AdminOrderAdapter processingOrderAdapter;
     private AdminOrderAdapter verifiedOrderAdapter;
     private View emptyOrderView;
+    private TextView processingOrderText;
+    private TextView verifiedOrderText;
 
     @Nullable
     @Override
@@ -37,8 +40,14 @@ public class AdminOrdersFragment extends Fragment {
         verifiedOrdersRecyclerView = view.findViewById(R.id.verifiedOrdersRecyclerView);
         emptyOrderView = view.findViewById(R.id.empty_order_view);
 
+        processingOrderText = view.findViewById(R.id.processingOrdersTitle);
+        verifiedOrderText = view.findViewById(R.id.verifiedOrdersTitle);
+
+        processingOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        verifiedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         setupOrders();
-        setupRecyclerViews();
+        updateOrdersView();
 
         return view;
     }
@@ -48,29 +57,51 @@ public class AdminOrdersFragment extends Fragment {
         // For this example, we'll create some sample orders
         processingOrders = createSampleProcessingOrders();
         verifiedOrders = createSampleVerifiedOrders();
+
+        processingOrderAdapter = new AdminOrderAdapter(processingOrders, true, new AdminOrderAdapter.OnOrderActionListener() {
+            @Override
+            public void onVerifyClicked(Order order, int position) {
+                onOrderVerified(order);
+            }
+
+            @Override
+            public void onDeleteClicked(Order order, int position) {
+                onOrderDeleted(order);
+            }
+        });
+
+        verifiedOrderAdapter = new AdminOrderAdapter(verifiedOrders, false, new AdminOrderAdapter.OnOrderActionListener() {
+            @Override
+            public void onVerifyClicked(Order order, int position) {
+                // Do nothing for verified orders
+            }
+
+            @Override
+            public void onDeleteClicked(Order order, int position) {
+                onOrderDeleted(order);
+            }
+        });
+
+        processingOrdersRecyclerView.setAdapter(processingOrderAdapter);
+        verifiedOrdersRecyclerView.setAdapter(verifiedOrderAdapter);
+
         updateOrdersView();
     }
 
-    private void setupRecyclerViews() {
-        processingOrderAdapter = new AdminOrderAdapter(processingOrders, true, this::onOrderVerified, this::onOrderDeleted);
-        verifiedOrderAdapter = new AdminOrderAdapter(verifiedOrders, false, null, this::onOrderDeleted);
-
-        processingOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        processingOrdersRecyclerView.setAdapter(processingOrderAdapter);
-
-        verifiedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        verifiedOrdersRecyclerView.setAdapter(verifiedOrderAdapter);
-    }
 
     private void updateOrdersView() {
         if (processingOrders.isEmpty() && verifiedOrders.isEmpty()) {
             emptyOrderView.setVisibility(View.VISIBLE);
             processingOrdersRecyclerView.setVisibility(View.GONE);
             verifiedOrdersRecyclerView.setVisibility(View.GONE);
+            processingOrderText.setVisibility(View.GONE);
+            verifiedOrderText.setVisibility(View.GONE);
         } else {
             emptyOrderView.setVisibility(View.GONE);
             processingOrdersRecyclerView.setVisibility(View.VISIBLE);
             verifiedOrdersRecyclerView.setVisibility(View.VISIBLE);
+            processingOrderText.setVisibility(View.VISIBLE);
+            verifiedOrderText.setVisibility(View.VISIBLE);
         }
     }
 
@@ -120,8 +151,7 @@ public class AdminOrdersFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setupOrders();
-        processingOrderAdapter.notifyDataSetChanged();
-        verifiedOrderAdapter.notifyDataSetChanged();
         updateOrdersView();
     }
 }
+
