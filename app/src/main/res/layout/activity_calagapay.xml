@@ -43,7 +43,7 @@
                 app:cardBackgroundColor="@color/white"
                 android:layout_marginHorizontal="4dp"
                 android:layout_marginVertical="4dp"
-               >
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"

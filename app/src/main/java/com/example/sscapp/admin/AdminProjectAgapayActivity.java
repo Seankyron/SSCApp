@@ -15,14 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sscapp.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AdminProjectAgapayActivity extends AppCompatActivity {
 
     private RecyclerView requestsRecyclerView;
     private RequestAdapter requestAdapter;
+    private TextInputEditText dateFilterEditText;
+    private List<PrintRequest> allRequests;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +43,45 @@ public class AdminProjectAgapayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        dateFilterEditText = findViewById(R.id.dateFilterEditText);
+        setupDateFilter();
+
         requestsRecyclerView = findViewById(R.id.requestsRecyclerView);
         requestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         requestAdapter = new RequestAdapter();
         requestsRecyclerView.setAdapter(requestAdapter);
 
-        requestAdapter.setRequests(createDummyData());
+        allRequests = createDummyData();
+        filterRequests(null); // Initially show all requests
+    }
+
+    private void setupDateFilter() {
+        dateFilterEditText.setOnClickListener(v -> {
+            MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select Date")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build();
+
+            datePicker.addOnPositiveButtonClickListener(selection -> {
+                String formattedDate = dateFormat.format(new Date(selection));
+                dateFilterEditText.setText(formattedDate);
+                filterRequests(formattedDate);
+            });
+
+            datePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+        });
+    }
+
+    private void filterRequests(String filterDate) {
+        List<PrintRequest> filteredRequests;
+        if (filterDate == null || filterDate.isEmpty()) {
+            filteredRequests = allRequests;
+        } else {
+            filteredRequests = allRequests.stream()
+                    .filter(request -> request.dateOfClaiming.equals(filterDate))
+                    .collect(Collectors.toList());
+        }
+        requestAdapter.setRequests(filteredRequests);
     }
 
     private List<PrintRequest> createDummyData() {

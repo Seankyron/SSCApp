@@ -256,5 +256,10 @@ public class CALagapay extends AppCompatActivity {
             return layout;
         }
     }
+
+    public void updateCalculatorAvailability(boolean[] availability) {
+        calculatorAvailability = availability;
+        ((CalculatorGridAdapter) calculatorGridView.getAdapter()).notifyDataSetChanged();
+    }
 }
 
