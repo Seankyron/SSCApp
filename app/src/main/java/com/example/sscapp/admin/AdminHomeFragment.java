@@ -166,13 +166,13 @@ public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.On
                         startActivity(new Intent(requireContext(), AdminCALagapayActivity.class));
                         break;
                     case "ReSSCue":
-                        startActivity(new Intent(requireContext(), AdminReSSCueActivity.class));
+                        Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                         break;
                     case "eSSCentials":
-                        startActivity(new Intent(requireContext(), AdmineSSCentialsActivity.class));
+                        Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                         break;
                     case "Zoom Connect":
-                        startActivity(new Intent(requireContext(), AdminZoomConnectActivity.class));
+                        Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
