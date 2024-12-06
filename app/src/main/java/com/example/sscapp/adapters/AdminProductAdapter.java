@@ -1,5 +1,6 @@
 package com.example.sscapp.adapters;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.sscapp.R;
 import com.example.sscapp.models.Product;
 import java.util.List;
@@ -74,7 +77,6 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
             productName.setText(product.getName());
             productDescription.setText(product.getDescription());
             productPrice.setText(currencyFormatter.format(product.getPrice()));
-            productImage.setImageResource(product.getImageResId());
 
             // Set the status
             if (product.getStatus() != null && !product.getStatus().isEmpty()) {
@@ -100,6 +102,12 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
                     drawable.setColor(statusColor);
                     productStatus.setBackground(drawable);
                 }
+
+                Context context = itemView.getContext();
+                Glide.with(context)
+                        .load(product.getImageResId())
+                        .fitCenter()
+                        .into(productImage);
             } else {
                 productStatus.setVisibility(View.GONE);
             }

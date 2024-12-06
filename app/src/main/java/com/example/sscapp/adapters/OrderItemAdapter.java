@@ -61,7 +61,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
 
         void bind(CartItem item) {
             if (item != null) {
-                productImage.setImageResource(item.getImageResId());
                 productName.setText(item.getName());
                 productQuantity.setText(String.format("Qty: %d", item.getQuantity()));
                 productPrice.setText(currencyFormatter.format(item.getPrice() * item.getQuantity()));

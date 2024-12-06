@@ -1,6 +1,7 @@
 package com.example.sscapp.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.sscapp.R;
 import com.example.sscapp.CartManager;
 import com.example.sscapp.models.CartItem;
@@ -67,11 +70,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         @SuppressLint({"NotifyDataSetChanged", "DefaultLocale"})
         void bind(CartItem item) {
-            productImage.setImageResource(item.getImageResId());
             productName.setText(item.getName());
             productPrice.setText(String.format("₱%.2f", item.getPrice()));
             productQuantity.setText(String.valueOf(item.getQuantity()));
             productSize.setText(String.format("‧  Size: %s", item.getSize()));
+
+            Context context = itemView.getContext();
+            Glide.with(context)
+                    .load(item.getImageResId())
+                    .fitCenter()
+                    .into(productImage);
 
             itemView.findViewById(R.id.increase_quantity).setOnClickListener(v -> {
                 item.setQuantity(item.getQuantity() + 1);

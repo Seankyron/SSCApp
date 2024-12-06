@@ -1,6 +1,8 @@
 package com.example.sscapp.adapters;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.sscapp.R;
 import com.example.sscapp.models.Product;
 import java.util.List;
@@ -78,11 +82,31 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productName.setText(product.getName());
             productDescription.setText(product.getDescription());
             productPrice.setText(currencyFormatter.format(product.getPrice()));
-            productImage.setImageResource(product.getImageResId());
 
-            // Set the image tint to gray
-            int grayColor = ContextCompat.getColor(itemView.getContext(), android.R.color.darker_gray);
-            ImageViewCompat.setImageTintList(productImage, ColorStateList.valueOf(grayColor));
+            int statusColor;
+            switch (product.getStatus().toLowerCase()) {
+                case "limited":
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.yellow_dark);
+                    break;
+                case "out-of-stock":
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.red_primary);
+                    break;
+                default:
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.green);
+                    break;
+            }
+
+            GradientDrawable drawable = (GradientDrawable) ContextCompat.getDrawable(itemView.getContext(), R.drawable.bg_service_status);
+            if (drawable != null) {
+                drawable.setColor(statusColor);
+                productStatus.setBackground(drawable);
+            }
+
+            Context context = itemView.getContext();
+            Glide.with(context)
+                    .load(product.getImageResId())
+                    .fitCenter()
+                    .into(productImage);
 
             // Set the status
             if (product.getStatus() != null && !product.getStatus().isEmpty()) {

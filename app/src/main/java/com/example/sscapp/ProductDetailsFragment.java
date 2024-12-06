@@ -87,7 +87,7 @@ public class ProductDetailsFragment extends Fragment {
             productDescription.setText(product.getDescription());
             productStatus.setText(product.getStatus());
 
-            Glide.with(this.context)
+            Glide.with(requireContext())
                     .load(product.getImageResId())
                     .fitCenter()
                     .into(productImage);

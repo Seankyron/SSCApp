@@ -7,9 +7,9 @@ public class GroupedCartItem {
     private String name;
     private double price;
     private Map<String, Integer> sizes;
-    private int imageResId;
+    private String imageResId;
 
-    public GroupedCartItem(String name, double price, int imageResId) {
+    public GroupedCartItem(String name, double price, String imageResId) {
         this.name = name;
         this.price = price;
         this.imageResId = imageResId;
@@ -32,7 +32,7 @@ public class GroupedCartItem {
         return sizes;
     }
 
-    public int getImageResId() {
+    public String getImageResId() {
         return imageResId;
     }
 
