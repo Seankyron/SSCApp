@@ -82,10 +82,10 @@ public class AdminMainActivity extends AppCompatActivity {
                 navController.navigate(R.id.adminUpdatesFragment);
                 return true;
             } else if (itemId == R.id.store) {
-                navController.navigate(R.id.storeFragment);
+                navController.navigate(R.id.adminStoreFragment);
                 return true;
             } else if (itemId == R.id.events) {
-                navController.navigate(R.id.eventsFragment);
+                navController.navigate(R.id.adminEventsFragment);
                 return true;
             }
             return false;
@@ -94,8 +94,8 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private void setupActionBarNavigation() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
-                R.id.eventsFragment
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
+                R.id.adminEventsFragment
         ).build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -126,8 +126,10 @@ public class AdminMainActivity extends AppCompatActivity {
     private int getTitleForDestination(int destinationId) {
         if (destinationId == R.id.homeFragment) return R.string.menu_home;
         if (destinationId == R.id.adminUpdatesFragment) return R.string.menu_updates;
-        if (destinationId == R.id.storeFragment) return R.string.menu_store;
-        if (destinationId == R.id.eventsFragment) return R.string.menu_events;
+        if (destinationId == R.id.adminStoreFragment) return R.string.menu_store;
+        if (destinationId == R.id.addProductFragment) return R.string.add_product;
+        if (destinationId == R.id.addAnnouncementFragment) return R.string.add_announcement;
+        if (destinationId == R.id.adminEventsFragment) return R.string.menu_events;
         if (destinationId == R.id.cartFragment) return R.string.menu_cart;
         if (destinationId == R.id.notificationsFragment) return R.string.menu_notifications;
         return 0;
@@ -137,24 +139,14 @@ public class AdminMainActivity extends AppCompatActivity {
         if (optionsMenu == null) return;
 
         int destinationId = destination.getId();
-        boolean isHomeRelatedFragment = isHomeRelatedFragment(destinationId);
-        boolean isStoreRelatedFragment = isStoreRelatedFragment(destinationId);
+        boolean isUpdatesRelatedFragment = isUpdatesRelatedFragment(destinationId);
 
-        optionsMenu.findItem(R.id.action_search).setVisible(isHomeRelatedFragment);
-        optionsMenu.findItem(R.id.action_notifications).setVisible(isHomeRelatedFragment);
-        optionsMenu.findItem(R.id.action_cart).setVisible(isStoreRelatedFragment);
+        optionsMenu.findItem(R.id.action_add_announcement).setVisible(isUpdatesRelatedFragment);
     }
 
-    private boolean isHomeRelatedFragment(int fragmentId) {
-        return fragmentId == R.id.homeFragment
-                || fragmentId == R.id.adminUpdatesFragment
-                || fragmentId == R.id.eventsFragment;
+    private boolean isUpdatesRelatedFragment(int fragmentId) {
+        return fragmentId == R.id.adminUpdatesFragment;
     }
-
-    private boolean isStoreRelatedFragment(int fragmentId) {
-        return fragmentId == R.id.storeFragment;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -176,6 +168,8 @@ public class AdminMainActivity extends AppCompatActivity {
             // Optional: Implement search functionality
             Toast.makeText(this, "Search functionality coming soon", Toast.LENGTH_SHORT).show();
             return true;
+        } else if (itemId == R.id.action_add_announcement) {
+            navController.navigate(R.id.addAnnouncementFragment);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -183,8 +177,8 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.storeFragment,
-                R.id.eventsFragment
+                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
+                R.id.adminEventsFragment
         ).build()) || super.onSupportNavigateUp();
     }
 }

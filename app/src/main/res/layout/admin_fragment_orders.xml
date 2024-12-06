@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_light"
+    android:background="@color/background_light"
     android:layout_marginBottom="55dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".UpdatesFragment">
+        tools:context=".OrdersFragment">
 
         <LinearLayout
-            android:id="@+id/pinnedUpdatesHeader"
+            android:id="@+id/processingOrdersHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -27,25 +27,25 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:id="@+id/pinnedUpdatesIcon"
+                android:id="@+id/processingOrdersIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_pin"
+                android:src="@drawable/ic_processing"
                 android:layout_marginEnd="8dp"
                 app:tint="@color/text_primary" />
 
             <TextView
-                android:id="@+id/pinnedUpdatesTitle"
+                android:id="@+id/processingOrdersTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pinned Updates"
+                android:text="Processing Orders"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pinnedUpdatesRecyclerView"
+            android:id="@+id/processingOrdersRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -54,11 +54,11 @@
             android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pinnedUpdatesHeader"
-            tools:listitem="@layout/item_announcement" />
+            app:layout_constraintTop_toBottomOf="@id/processingOrdersHeader"
+            tools:listitem="@layout/admin_item_order" />
 
         <LinearLayout
-            android:id="@+id/recentUpdatesHeader"
+            android:id="@+id/verifiedOrdersHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -67,29 +67,29 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pinnedUpdatesRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/processingOrdersRecyclerView"
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:id="@+id/recentUpdatesIcon"
+                android:id="@+id/verifiedOrdersIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_recent"
+                android:src="@drawable/ic_verified"
                 android:layout_marginEnd="8dp"
                 app:tint="@color/text_primary" />
 
             <TextView
-                android:id="@+id/recentUpdatesTitle"
+                android:id="@+id/verifiedOrdersTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recent Updates"
+                android:text="Verified Orders"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recentUpdatesRecyclerView"
+            android:id="@+id/verifiedOrdersRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -98,8 +98,20 @@
             android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recentUpdatesHeader"
-            tools:listitem="@layout/item_announcement" />
+            app:layout_constraintTop_toBottomOf="@id/verifiedOrdersHeader"
+            tools:listitem="@layout/item_order" />
+
+        <include
+            android:id="@+id/empty_order_view"
+            layout="@layout/empty_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

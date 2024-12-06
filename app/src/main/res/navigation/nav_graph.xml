@@ -109,9 +109,39 @@
         android:label="Admin Updates"
         tools:layout="@layout/admin_fragment_updates">
         <action
-            android:id="@+id/action_adminUpdatesFragment_to_adminHomeFragment"
-            app:destination="@id/adminHomeFragment" />
+            android:id="@+id/action_adminUpdatesFragment_to_adminAddAnnouncementFragment"
+            app:destination="@id/addAnnouncementFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addAnnouncementFragment"
+        android:name="com.example.sscapp.AdminAddAnnouncementsFragment"
+        android:label="Add Announcement"
+        tools:layout="@layout/admin_fragment_add_announcement"/>
+
+    <fragment
+        android:id="@+id/adminEventsFragment"
+        android:name="com.example.sscapp.AdminEventFragment"
+        android:label="Add Event"
+        tools:layout="@layout/admin_fragment_events"/>
+
+    <fragment
+        android:id="@+id/adminStoreFragment"
+        android:name="com.example.sscapp.AdminStoreFragment"
+        android:label="Admin Store"
+        tools:layout="@layout/admin_fragment_store"/>
+
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.example.sscapp.AddProductFragment"
+        android:label="Add Product"
+        tools:layout="@layout/admin_add_product"/>
+
+    <action
+        android:id="@+id/action_adminStoreFragment_to_adminAddProductFragment"
+        app:destination="@id/addProductFragment"
+        app:popUpTo="@id/storeFragment"
+        app:popUpToInclusive="false" />
 
 </navigation>
 
