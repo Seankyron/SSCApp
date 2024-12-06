@@ -1,26 +1,46 @@
 package com.example.sscapp.admin;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.example.sscapp.R;
+import com.example.sscapp.adapters.AdminLostAndFoundPagerAdapter;
 
 public class AdminLostFoundActivity extends AppCompatActivity {
+
+    private ViewPager2 viewPager;
+    private TabLayout tabLayout;
+    private AdminLostAndFoundPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_lost_found);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Setup toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        // Initialize ViewPager2 and TabLayout
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
+
+        // Set up the adapter
+        pagerAdapter = new AdminLostAndFoundPagerAdapter(this);
+        viewPager.setAdapter(pagerAdapter);
+
+        // Connect TabLayout with ViewPager2
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(AdminLostAndFoundPagerAdapter.getTabTitle(position))
+        ).attach();
+
+        // Reduce the sensitivity of ViewPager2 to prevent accidental swipes
+        viewPager.setUserInputEnabled(true);
+        viewPager.setOffscreenPageLimit(1);
     }
 }

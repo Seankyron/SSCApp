@@ -15,6 +15,16 @@ public class Item {
         this.imageResource = imageResource;
     }
 
+    // Additional constructor with all fields
+    public Item(String name, String location, String date, int imageResource, String description, String contactInfo) {
+        this.name = name;
+        this.location = location;
+        this.date = date;
+        this.imageResource = imageResource;
+        this.description = description;
+        this.contactInfo = contactInfo;
+    }
+
     // Getters and setters
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

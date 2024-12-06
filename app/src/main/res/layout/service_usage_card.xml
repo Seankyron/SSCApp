@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="8dp">
+    android:backgroundTint="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,14 +18,16 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_calculator"/>
+            android:src="@drawable/ic_calculator"
+            app:tint="@color/red_primary"/>
 
         <TextView
             android:id="@+id/service_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CALagapay"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
 
         <TextView
             android:id="@+id/service_usage"

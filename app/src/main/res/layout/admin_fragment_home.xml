@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,13 +52,15 @@
                             android:layout_height="wrap_content"
                             android:text="1,245"
                             android:textSize="20sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/red_primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total Users"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -73,13 +76,15 @@
                             android:layout_height="wrap_content"
                             android:text="876"
                             android:textSize="20sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/red_primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Paid Memberships"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -90,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
