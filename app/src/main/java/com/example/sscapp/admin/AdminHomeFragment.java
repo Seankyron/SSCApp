@@ -125,7 +125,7 @@ public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.On
                 intent = new Intent(requireContext(), AdminUserManagementActivity.class);
                 break;
             case "/admin/service-reports":
-                intent = new Intent(requireContext(), AdminServiceReportsActivity.class);
+                Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case "/admin/lostFound":
                 intent = new Intent(requireContext(), AdminLostFoundActivity.class);
