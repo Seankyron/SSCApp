@@ -6,10 +6,10 @@ public class CartItem {
     private String name;
     private double price;
     private int quantity;
-    private int imageResId;
+    private String imageResId;
     private String size;
 
-    public CartItem(String name, double price, int quantity, int imageResId, String size) {
+    public CartItem(String name, double price, int quantity, String imageResId, String size) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -42,11 +42,11 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public int getImageResId() {
+    public String getImageResId() {
         return imageResId;
     }
 
-    public void setImageResId(int imageResId) {
+    public void setImageResId(String imageResId) {
         this.imageResId = imageResId;
     }
 

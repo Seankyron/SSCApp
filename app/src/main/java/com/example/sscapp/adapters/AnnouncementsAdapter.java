@@ -1,5 +1,6 @@
 package com.example.sscapp.adapters;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sscapp.R;
+import com.bumptech.glide.Glide;
 import com.example.sscapp.models.Announcement;
 import com.squareup.picasso.Picasso;
 import java.util.List;
@@ -18,9 +20,11 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
 
     private final List<Announcement> announcements;
     private int itemCount = 0;
+    private Context context;
 
-    public AnnouncementsAdapter(List<Announcement> announcements) {
+    public AnnouncementsAdapter(Context context, List<Announcement> announcements) {
         this.announcements = announcements;
+        this.context = context;
     }
 
     public void setItemCount(int count) {
@@ -73,7 +77,12 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
         // Set category and author text colors
         holder.category.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.text_secondary));
 
-        Picasso.get().load(announcement.getImage()).into(holder.image);
+
+
+        Glide.with(context)
+                .load(announcement.getImage())
+                .fitCenter()
+                .into(holder.image);
     }
 
     @Override

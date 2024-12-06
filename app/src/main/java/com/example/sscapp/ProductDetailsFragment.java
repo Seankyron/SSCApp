@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.sscapp.models.CartItem;
 import com.example.sscapp.models.Product;
 import com.google.android.material.button.MaterialButton;
@@ -81,11 +82,15 @@ public class ProductDetailsFragment extends Fragment {
 
     private void populateProductDetails() {
         if (product != null) {
-            productImage.setImageResource(product.getImageResId());
             productName.setText(product.getName());
             productPrice.setText(String.format("₱%.2f", product.getPrice()));
             productDescription.setText(product.getDescription());
             productStatus.setText(product.getStatus());
+
+            Glide.with(this.context)
+                    .load(product.getImageResId())
+                    .fitCenter()
+                    .into(productImage);
         } else {
             Log.e("ProductDetailsFragment", "Product is null");
         }

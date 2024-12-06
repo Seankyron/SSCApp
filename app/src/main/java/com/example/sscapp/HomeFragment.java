@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements QuickAccessAdapter.OnQuick
             }
         }
 
-        AnnouncementsAdapter adapter = new AnnouncementsAdapter(pinnedAnnouncements);
+        AnnouncementsAdapter adapter = new AnnouncementsAdapter(getContext(), pinnedAnnouncements);
 
         CarouselLayoutManager layoutManager = new CarouselLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);

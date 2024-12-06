@@ -7,14 +7,14 @@ public class Product implements Parcelable {
     private String name;
     private double price;
     private String description;
-    private int imageResId;
+    private String image;
     private String status;
 
-    public Product(String name, double price, String description, int imageResId, String status) {
+    public Product(String name, double price, String description, String image, String status) {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.imageResId = imageResId;
+        this.image = image;
         this.status = status;
     }
 
@@ -22,7 +22,7 @@ public class Product implements Parcelable {
         name = in.readString();
         price = in.readDouble();
         description = in.readString();
-        imageResId = in.readInt();
+        image = in.readString();
         status = in.readString();
     }
 
@@ -51,8 +51,8 @@ public class Product implements Parcelable {
         return description;
     }
 
-    public int getImageResId() {
-        return imageResId;
+    public String getImageResId() {
+        return image;
     }
 
     public String getStatus() {
@@ -69,7 +69,7 @@ public class Product implements Parcelable {
         dest.writeString(name);
         dest.writeDouble(price);
         dest.writeString(description);
-        dest.writeInt(imageResId);
+        dest.writeString(image);
         dest.writeString(status);
     }
 }
