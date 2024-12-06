@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import androidx.fragment.app.Fragment;
+
+import com.example.sscapp.R;
+import com.example.sscapp.UpdatesFragment;
 import com.example.sscapp.models.Announcement;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;

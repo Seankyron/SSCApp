@@ -4,13 +4,15 @@ import java.util.List;
 
 public class Order {
     private String orderId;
+    private String srCode;
     private String date;
     private String status;
     private double totalAmount;
     private List<GroupedCartItem> items;
 
-    public Order(String orderId, String date, String status, double totalAmount, List<GroupedCartItem> items) {
+    public Order(String orderId, String srCode, String date, String status, double totalAmount, List<GroupedCartItem> items) {
         this.orderId = orderId;
+        this.srCode = srCode;
         this.date = date;
         this.status = status;
         this.totalAmount = totalAmount;
@@ -19,6 +21,10 @@ public class Order {
 
     public String getOrderId() {
         return orderId;
+    }
+
+    public String getSrCode() {
+        return srCode;
     }
 
     public void setOrderId(String orderId) {

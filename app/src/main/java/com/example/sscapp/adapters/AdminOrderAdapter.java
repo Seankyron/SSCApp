@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.sscapp.R;
 import com.example.sscapp.models.Order;
@@ -46,27 +47,37 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
 
     class AdminOrderViewHolder extends RecyclerView.ViewHolder {
         TextView orderIdTextView;
+        TextView srCodeTextView;
         TextView dateTextView;
         TextView statusTextView;
         TextView totalAmountTextView;
         ImageButton deleteButton;
         ImageButton verifyButton;
+        RecyclerView itemsRecyclerView;
 
         AdminOrderViewHolder(@NonNull View itemView) {
             super(itemView);
             orderIdTextView = itemView.findViewById(R.id.order_id);
+            srCodeTextView = itemView.findViewById(R.id.sr_code);
             dateTextView = itemView.findViewById(R.id.order_date);
             statusTextView = itemView.findViewById(R.id.order_status);
             totalAmountTextView = itemView.findViewById(R.id.order_total);
             deleteButton = itemView.findViewById(R.id.btn_delete_order);
             verifyButton = itemView.findViewById(R.id.btn_confirm_order);
+            itemsRecyclerView = itemView.findViewById(R.id.items_recycler_view);
         }
 
         void bind(Order order) {
             orderIdTextView.setText(order.getOrderId());
+            srCodeTextView.setText(order.getSrCode());
             dateTextView.setText(order.getDate());
             statusTextView.setText(order.getStatus());
             totalAmountTextView.setText(String.format("₱%.2f", order.getTotalAmount()));
+
+
+            GroupedItemAdapter groupedItemAdapter = new GroupedItemAdapter(order.getItems());
+            itemsRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+            itemsRecyclerView.setAdapter(groupedItemAdapter);
 
             deleteButton.setOnClickListener(v -> onDeleteClick.accept(order));
 

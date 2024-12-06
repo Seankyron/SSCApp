@@ -127,7 +127,7 @@
             android:name=".HomeFragment"
             android:exported="false" />
         <activity
-            android:name=".AdminMainActivity"
+            android:name=".admin.AdminMainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

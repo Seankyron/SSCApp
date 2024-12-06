@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,7 +167,9 @@ public class CartFragment extends Fragment {
 
         List<GroupedCartItem> orderItems = new ArrayList<>(groupedItems.values());
 
-        Order newOrder = new Order(strOrderId, date, status, totalAmount, orderItems);
+        Log.d("GroupedCartItem", "CartItem: " + groupedItems.values());
+
+        Order newOrder = new Order(strOrderId, "22-08080", date, status, totalAmount, orderItems); //getUserSrCode();
         // Add the order to OrderManager
         OrderManager.getInstance().addOrder(newOrder);
 

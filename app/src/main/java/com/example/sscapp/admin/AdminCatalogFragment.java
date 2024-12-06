@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sscapp.R;
 import com.example.sscapp.adapters.AdminProductAdapter;
 import com.example.sscapp.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,7 +59,7 @@ public class AdminCatalogFragment extends Fragment implements AdminProductAdapte
     private void setupProducts() {
         products = new ArrayList<>();
         // Add sample products
-        products.add(new Product("T-Shirt", 299.00, "Comfortable cotton t-shirt", R.drawable.product_tshirt, "Low-Stock"));
+        products.add(new Product("T-Shirt", 299.00, "Comfortable cotton t-shirt", R.drawable.product_tshirt, "Available"));
         // Add more products as needed
 
         AdminProductAdapter adapter = new AdminProductAdapter(products, this);

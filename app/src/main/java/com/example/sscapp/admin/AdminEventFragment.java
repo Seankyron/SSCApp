@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

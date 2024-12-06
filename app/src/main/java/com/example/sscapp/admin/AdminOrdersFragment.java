@@ -1,6 +1,7 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sscapp.R;
 import com.example.sscapp.adapters.AdminOrderAdapter;
+import com.example.sscapp.models.GroupedCartItem;
 import com.example.sscapp.models.Order;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,14 +96,23 @@ public class AdminOrdersFragment extends Fragment {
 
     private List<Order> createSampleProcessingOrders() {
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order("ORD001", "2023-05-20", "Processing", 99.99, new ArrayList<>()));
-        orders.add(new Order("ORD002", "2023-05-21", "Processing", 149.99, new ArrayList<>()));
+        // Create sample GroupedCartItems
+        List<GroupedCartItem> groupedCartItems = new ArrayList<>();
+        GroupedCartItem shirt1 = new GroupedCartItem("T-Shirt", 19.99, R.drawable.product_tshirt);
+        shirt1.addSize("S", 2);
+        shirt1.addSize("M", 1);
+        groupedCartItems.add(shirt1);
+
+        Log.d("GroupedCartItem", "CartItem: " + groupedCartItems);
+
+        orders.add(new Order("ORD001", "22-08080", "2023-05-20", "Processing", 99.99, groupedCartItems));
+        orders.add(new Order("ORD002", "22-08080", "2023-05-21", "Processing", 149.99, groupedCartItems));
         return orders;
     }
 
     private List<Order> createSampleVerifiedOrders() {
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order("ORD003", "2023-05-19", "Verified", 79.99, new ArrayList<>()));
+        orders.add(new Order("ORD003", "22-08080", "2023-05-19", "Verified", 79.99, new ArrayList<>()));
         return orders;
     }
 

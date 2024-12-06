@@ -79,7 +79,7 @@ public class AdminHomeFragment extends Fragment implements QuickAccessAdapter.On
         List<QuickLink> quickLinks = new ArrayList<>();
 
         quickLinks.add(new QuickLink("User Management", R.drawable.ic_users, "/admin/users", false));
-        quickLinks.add(new QuickLink("Membership Tracking", R.drawable.ic_payment, "/admin/payments", false));
+        quickLinks.add(new QuickLink("Membership", R.drawable.ic_payment, "/admin/payments", false));
         quickLinks.add(new QuickLink("Lost and Found", R.drawable.ic_search, "/admin/lostFound", false));
         quickLinks.add(new QuickLink("Service Reports", R.drawable.ic_report, "/admin/service-reports", false));
 

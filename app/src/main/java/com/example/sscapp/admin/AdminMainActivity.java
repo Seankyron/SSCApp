@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.sscapp.MainActivity;
+import com.example.sscapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 

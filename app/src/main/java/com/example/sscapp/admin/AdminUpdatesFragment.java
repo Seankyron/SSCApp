@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sscapp.R;
+import com.example.sscapp.UpdatesFragment;
 import com.example.sscapp.adapters.AdminUpdatesAdapter;
 import com.example.sscapp.adapters.OnAnnouncementActionListener;
 import com.example.sscapp.models.Announcement;

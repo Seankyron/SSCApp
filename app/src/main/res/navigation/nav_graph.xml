@@ -105,7 +105,7 @@
 
     <fragment
         android:id="@+id/adminUpdatesFragment"
-        android:name="com.example.sscapp.AdminUpdatesFragment"
+        android:name="com.example.sscapp.admin.AdminUpdatesFragment"
         android:label="Admin Updates"
         tools:layout="@layout/admin_fragment_updates">
         <action
@@ -115,25 +115,25 @@
 
     <fragment
         android:id="@+id/addAnnouncementFragment"
-        android:name="com.example.sscapp.AdminAddAnnouncementsFragment"
+        android:name="com.example.sscapp.admin.AdminAddAnnouncementsFragment"
         android:label="Add Announcement"
         tools:layout="@layout/admin_fragment_add_announcement"/>
 
     <fragment
         android:id="@+id/adminEventsFragment"
-        android:name="com.example.sscapp.AdminEventFragment"
+        android:name="com.example.sscapp.admin.AdminEventFragment"
         android:label="Add Event"
         tools:layout="@layout/admin_fragment_events"/>
 
     <fragment
         android:id="@+id/adminStoreFragment"
-        android:name="com.example.sscapp.AdminStoreFragment"
+        android:name="com.example.sscapp.admin.AdminStoreFragment"
         android:label="Admin Store"
         tools:layout="@layout/admin_fragment_store"/>
 
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="com.example.sscapp.AddProductFragment"
+        android:name="com.example.sscapp.admin.AddProductFragment"
         android:label="Add Product"
         tools:layout="@layout/admin_add_product"/>
 

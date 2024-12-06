@@ -1,6 +1,7 @@
 package com.example.sscapp.adapters;
 
 import android.content.res.ColorStateList;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,12 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
                         statusColor = ContextCompat.getColor(itemView.getContext(), R.color.green);
                         break;
                 }
-                productStatus.setTextColor(statusColor);
+
+                GradientDrawable drawable = (GradientDrawable) ContextCompat.getDrawable(itemView.getContext(), R.drawable.bg_service_status);
+                if (drawable != null) {
+                    drawable.setColor(statusColor);
+                    productStatus.setBackground(drawable);
+                }
             } else {
                 productStatus.setVisibility(View.GONE);
             }

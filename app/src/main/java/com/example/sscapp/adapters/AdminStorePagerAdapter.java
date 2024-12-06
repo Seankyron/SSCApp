@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.sscapp.AdminCatalogFragment;
-import com.example.sscapp.AdminOrdersFragment;
-import com.example.sscapp.CatalogFragment;
-import com.example.sscapp.OrdersFragment;
+import com.example.sscapp.admin.AdminCatalogFragment;
+import com.example.sscapp.admin.AdminOrdersFragment;
 
 public class AdminStorePagerAdapter extends FragmentStateAdapter {
 

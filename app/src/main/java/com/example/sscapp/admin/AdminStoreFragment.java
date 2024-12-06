@@ -1,4 +1,4 @@
-package com.example.sscapp;
+package com.example.sscapp.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.sscapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.example.sscapp.adapters.AdminStorePagerAdapter;
-import com.example.sscapp.models.Product;
 
 public class AdminStoreFragment extends Fragment implements AdminCatalogFragment.OnAddProductListener {
 
