@@ -95,7 +95,7 @@
     <!-- New Admin fragments -->
     <fragment
         android:id="@+id/adminHomeFragment"
-        android:name="com.example.sscapp.AdminHomeFragment"
+        android:name="com.example.sscapp.admin.AdminHomeFragment"
         android:label="Admin Home"
         tools:layout="@layout/admin_fragment_home">
         <action

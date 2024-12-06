@@ -1,5 +1,6 @@
 package com.example.sscapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,11 +54,22 @@ public class AdminMainActivity extends AppCompatActivity {
             setupBottomNavigation();
             setupActionBarNavigation();
             setupDestinationListener();
+            // Set the start destination to adminHomeFragment
+            navController.navigate(R.id.adminHomeFragment);
         }
 
         // Initialize DrawerLayout and NavigationView
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View adminViewSection = navigationView.findViewById(R.id.user_view_section);
+        adminViewSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent adminIntent = new Intent(AdminMainActivity.this, MainActivity.class);
+                startActivity(adminIntent);
+            }
+        });
 
         profileIcon.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(navigationView)) {
@@ -76,7 +88,7 @@ public class AdminMainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
-                navController.navigate(R.id.homeFragment);
+                navController.navigate(R.id.adminHomeFragment);
                 return true;
             } else if (itemId == R.id.updates) {
                 navController.navigate(R.id.adminUpdatesFragment);
@@ -94,7 +106,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private void setupActionBarNavigation() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
+                R.id.adminHomeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
                 R.id.adminEventsFragment
         ).build();
 
@@ -124,7 +136,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
 
     private int getTitleForDestination(int destinationId) {
-        if (destinationId == R.id.homeFragment) return R.string.menu_home;
+        if (destinationId == R.id.adminHomeFragment) return R.string.menu_home;
         if (destinationId == R.id.adminUpdatesFragment) return R.string.menu_updates;
         if (destinationId == R.id.adminStoreFragment) return R.string.menu_store;
         if (destinationId == R.id.addProductFragment) return R.string.add_product;
@@ -147,6 +159,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private boolean isUpdatesRelatedFragment(int fragmentId) {
         return fragmentId == R.id.adminUpdatesFragment;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -177,8 +190,9 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
+                R.id.adminHomeFragment, R.id.adminUpdatesFragment, R.id.adminStoreFragment,
                 R.id.adminEventsFragment
         ).build()) || super.onSupportNavigateUp();
     }
 }
+

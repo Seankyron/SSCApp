@@ -30,16 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        int admin = 1;
-        if (admin == 1) {
-            Intent adminIntent = new Intent(this, AdminMainActivity.class);
-            startActivity(adminIntent);
-            finish();
-        } else {
-            setContentView(R.layout.activity_main);
-            // Your existing code for regular users
-        }
+        setContentView(R.layout.activity_main);
 
         // Setup Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -79,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        View adminViewSection = navigationView.findViewById(R.id.admin_view_section);
+        adminViewSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent adminIntent = new Intent(MainActivity.this, AdminMainActivity.class);
+                startActivity(adminIntent);
             }
         });
 
@@ -207,3 +207,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }}
+

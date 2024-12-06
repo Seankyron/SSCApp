@@ -10,16 +10,75 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SSCApp"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".fragments.AddFoundItemActivity"
+            android:label="Add Found Item"
+            android:parentActivityName=".admin.AdminLostFoundActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".admin.AdminLostFoundActivity"/>
+        </activity>
+        <activity
+            android:name=".fragments.AddLostItemActivity"
+            android:label="Add Lost Item"
+            android:parentActivityName=".admin.AdminLostFoundActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".admin.AdminLostFoundActivity" />
+        </activity>
+        <activity
+            android:name=".fragments.AdminFoundItemsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.AdminLostItemsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminLostFoundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminHomeFragment"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminZoomConnectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdmineSSCentialsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminReSSCueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminCALagapayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminProjectAgapayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminMembershipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminServiceReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminUserManagementActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ContactFragment"
             android:exported="false" />
@@ -73,12 +132,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
