@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="John Doe"
+                    android:text="Mico Raphael Cuarto"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -120,7 +120,7 @@
                     android:id="@+id/tv_gsuite_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="johndoe@example.com"
+                    android:text="mico@gmail.com"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_id_card"
                     android:drawablePadding="8dp"
-                    android:text="SR Code: 12345678"
+                    android:text="SR Code: 2201122"
                     android:layout_marginBottom="4dp"/>
 
                 <TextView
