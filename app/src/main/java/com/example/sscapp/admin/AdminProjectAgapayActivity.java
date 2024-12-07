@@ -1,6 +1,8 @@
 package com.example.sscapp.admin;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,19 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.ParseException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class AdminProjectAgapayActivity extends AppCompatActivity {
 
@@ -51,8 +59,8 @@ public class AdminProjectAgapayActivity extends AppCompatActivity {
         requestAdapter = new RequestAdapter();
         requestsRecyclerView.setAdapter(requestAdapter);
 
-        allRequests = createDummyData();
-        filterRequests(null); // Initially show all requests
+        allRequests = new ArrayList<>();
+        fetchAgapayEntries();
     }
 
     private void setupDateFilter() {
@@ -72,26 +80,87 @@ public class AdminProjectAgapayActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchAgapayEntries() {
+        new FetchAgapayEntriesTask().execute("http://192.168.1.5:5000/api/admin/projectagapay");
+    }
+
     private void filterRequests(String filterDate) {
         List<PrintRequest> filteredRequests;
         if (filterDate == null || filterDate.isEmpty()) {
             filteredRequests = allRequests;
         } else {
-            filteredRequests = allRequests.stream()
-                    .filter(request -> request.dateOfClaiming.equals(filterDate))
-                    .collect(Collectors.toList());
+            filteredRequests = new ArrayList<>();
+            for (PrintRequest request : allRequests) {
+                if (request.dateOfClaiming.equals(filterDate)) {
+                    filteredRequests.add(request);
+                }
+            }
         }
         requestAdapter.setRequests(filteredRequests);
     }
 
-    private List<PrintRequest> createDummyData() {
-        List<PrintRequest> dummyRequests = new ArrayList<>();
-        dummyRequests.add(new PrintRequest("22-01122", "Mico Raphael F. Cuarto", "BSCS", "thesis_draft.pdf", "A4", 2, "May 15, 2024", "Please print double-sided"));
-        dummyRequests.add(new PrintRequest("22-02233", "Maria Santos", "BSIT", "project_proposal.docx", "Letter", 1, "May 16, 2024", "Color printing required"));
-        dummyRequests.add(new PrintRequest("22-03344", "John Doe", "BSECE", "circuit_diagram.png", "A3", 3, "May 17, 2024", "High quality print needed"));
-        dummyRequests.add(new PrintRequest("22-04455", "Emily Johnson", "BSA", "financial_report.xlsx", "Legal", 5, "May 18, 2024", "Confidential document"));
-        dummyRequests.add(new PrintRequest("22-05566", "Michael Brown", "BSME", "machine_blueprint.pdf", "A2", 1, "May 19, 2024", "Special paper required"));
-        return dummyRequests;
+    private class FetchAgapayEntriesTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String apiUrl = urls[0];
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    return result.toString();
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result == null) {
+                Toast.makeText(AdminProjectAgapayActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                allRequests.clear();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    PrintRequest request = new PrintRequest(
+                            jsonObject.getString("srcode"),
+                            jsonObject.getString("name"),
+                            jsonObject.getString("program"),
+                            jsonObject.getString("fileName"),
+                            jsonObject.getString("paperSize"),
+                            jsonObject.getInt("numberOfCopies"),
+                            jsonObject.getString("dateOfClaiming"),
+                            jsonObject.getString("remarks")
+                    );
+                    allRequests.add(request);
+                }
+                filterRequests(null); // Update UI with fetched data
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(AdminProjectAgapayActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private static class PrintRequest {
@@ -165,14 +234,11 @@ public class AdminProjectAgapayActivity extends AppCompatActivity {
                 dateTextView.setText(request.dateOfClaiming);
                 remarksTextView.setText(request.remarks);
 
-                markAsDoneButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        request.isDone = true;
-                        markAsDoneButton.setEnabled(false);
-                        markAsDoneButton.setText("Done");
-                        Toast.makeText(itemView.getContext(), "Marked as done: " + request.name, Toast.LENGTH_SHORT).show();
-                    }
+                markAsDoneButton.setOnClickListener(v -> {
+                    request.isDone = true;
+                    markAsDoneButton.setEnabled(false);
+                    markAsDoneButton.setText("Done");
+                    Toast.makeText(itemView.getContext(), "Marked as done: " + request.name, Toast.LENGTH_SHORT).show();
                 });
 
                 markAsDoneButton.setEnabled(!request.isDone);
@@ -181,4 +247,3 @@ public class AdminProjectAgapayActivity extends AppCompatActivity {
         }
     }
 }
-

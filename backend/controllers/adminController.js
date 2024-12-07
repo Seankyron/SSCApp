@@ -45,8 +45,7 @@ exports.addCalagapay = async (req, res) => {
     program,
     calculatorNumber, // New field
     purposeOfBorrowing, // New field
-    dateOfBorrowing,
-    dateOfReturn,
+    dateOfBorrowing
   } = req.body;
 
   try {
@@ -128,4 +127,11 @@ exports.addESSCential = async (req, res) => {
   }
 };
 
-
+exports.getCalagapayEntries = async (req, res) => {
+  try {
+    const entries = await Calagapay.find();
+    res.status(200).json(entries);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};

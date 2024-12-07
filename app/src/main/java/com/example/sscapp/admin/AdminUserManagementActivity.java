@@ -1,8 +1,7 @@
 package com.example.sscapp.admin;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sscapp.R;
 import com.example.sscapp.adapters.UserAdapter;
 import com.example.sscapp.models.User;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,33 +45,75 @@ public class AdminUserManagementActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         userList = new ArrayList<>();
-        // Populate userList with dummy data for now
-        userList.add(new User("John Doe", "john@example.com", "SR001", "Computer Science", "BS Computer Science", "3rd Year"));
-        userList.add(new User("Jane Smith", "jane@example.com", "SR002", "Engineering", "BS Electrical Engineering", "2nd Year"));
-
         userAdapter = new UserAdapter(userList);
         recyclerView.setAdapter(userAdapter);
 
+        fetchUserData();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_user_management, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+    private void fetchUserData() {
+        new FetchUserDataTask().execute("http://192.168.1.5:5000/api/auth/users");
+    }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                userAdapter.getFilter().filter(newText);
-                return true;
+    private class FetchUserDataTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String apiUrl = urls[0];
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    return result.toString();
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
             }
-        });
-        return true;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result == null) {
+                Toast.makeText(AdminUserManagementActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                userList.clear();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    User user = new User(
+                            jsonObject.getString("name"),
+                            jsonObject.getString("email"),
+                            jsonObject.getString("srCode"),
+                            jsonObject.getString("departmentName"),
+                            jsonObject.getString("program"),
+                            jsonObject.getString("yearLevel")
+                    );
+                    userList.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(AdminUserManagementActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
-

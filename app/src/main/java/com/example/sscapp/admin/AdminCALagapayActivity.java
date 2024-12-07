@@ -1,65 +1,174 @@
 package com.example.sscapp.admin;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.TextView;
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sscapp.R;
-import com.example.sscapp.adapters.CalculatorRequestAdapter;
-import com.example.sscapp.models.CalculatorRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminCALagapayActivity extends AppCompatActivity implements CalculatorRequestAdapter.OnCalculatorReturnedListener {
+public class AdminCALagapayActivity extends AppCompatActivity {
 
     private RecyclerView requestsRecyclerView;
-    private CalculatorRequestAdapter adapter;
+    private CalculatorRequestAdapter requestAdapter;
+    private List<CalculatorRequest> allRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_calagapay);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         requestsRecyclerView = findViewById(R.id.requestsRecyclerView);
         requestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        requestAdapter = new CalculatorRequestAdapter();
+        requestsRecyclerView.setAdapter(requestAdapter);
 
-        // TODO: Implement database attachment to fetch real data
-        List<CalculatorRequest> requests = getDummyRequests();
-
-        adapter = new CalculatorRequestAdapter(requests, this);
-        requestsRecyclerView.setAdapter(adapter);
+        allRequests = new ArrayList<>();
+        fetchCalagapayEntries();
     }
 
-    private List<CalculatorRequest> getDummyRequests() {
-        List<CalculatorRequest> requests = new ArrayList<>();
-        requests.add(new CalculatorRequest("John Doe", "Calculator 1", "Exam use", "2023-06-15"));
-        requests.add(new CalculatorRequest("Jane Smith", "Calculator 3", "Coursework", "2023-06-16"));
-        // Add more dummy data as needed
-        return requests;
+    private void fetchCalagapayEntries() {
+        new FetchCalagapayEntriesTask().execute("http://192.168.1.5:5000/api/admin/calagapay");
     }
 
-    @Override
-    public void onCalculatorReturned(CalculatorRequest request) {
-        // TODO: Implement database attachment
-        // databaseAttachment.markCalculatorAsReturned(request.getCalculatorNumber());
+    private class FetchCalagapayEntriesTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String apiUrl = urls[0];
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(apiUrl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
 
-        // Update the UI
-        adapter.removeRequest(request);
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    return result.toString();
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
 
-        // TODO: Update the user view
-        // Send a broadcast or use a shared ViewModel to update the CALagapay activity
-        Toast.makeText(this, "Calculator " + request.getCalculatorNumber() + " marked as returned", Toast.LENGTH_SHORT).show();
+        @Override
+        protected void onPostExecute(String result) {
+            if (result == null) {
+                Toast.makeText(AdminCALagapayActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                allRequests.clear();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CalculatorRequest request = new CalculatorRequest(
+                            jsonObject.getString("srCode"),
+                            jsonObject.getString("name"),
+                            jsonObject.getString("program"),
+                            jsonObject.getString("calculatorNumber"),
+                            jsonObject.getString("purposeOfBorrowing"),
+                            jsonObject.getString("dateOfBorrowing")
+                    );
+                    allRequests.add(request);
+                }
+                requestAdapter.setRequests(allRequests);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(AdminCALagapayActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private static class CalculatorRequest {
+        String srCode, name, program, calculatorNumber, purposeOfBorrowing, dateOfBorrowing;
+
+        CalculatorRequest(String srCode, String name, String program, String calculatorNumber, String purposeOfBorrowing, String dateOfBorrowing) {
+            this.srCode = srCode;
+            this.name = name;
+            this.program = program;
+            this.calculatorNumber = calculatorNumber;
+            this.purposeOfBorrowing = purposeOfBorrowing;
+            this.dateOfBorrowing = dateOfBorrowing;
+        }
+    }
+
+    private class CalculatorRequestAdapter extends RecyclerView.Adapter<CalculatorRequestAdapter.RequestViewHolder> {
+        private List<CalculatorRequest> requests = new ArrayList<>();
+
+        @NonNull
+        @Override
+        public RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_calculator_request, parent, false);
+            return new RequestViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
+            CalculatorRequest request = requests.get(position);
+            holder.bind(request);
+        }
+
+        @Override
+        public int getItemCount() {
+            return requests.size();
+        }
+
+        void setRequests(List<CalculatorRequest> requests) {
+            this.requests = requests;
+            notifyDataSetChanged();
+        }
+
+        class RequestViewHolder extends RecyclerView.ViewHolder {
+            TextView nameTextView, calculatorNumberTextView, purposeTextView, dateTextView;
+
+            RequestViewHolder(@NonNull View itemView) {
+                super(itemView);
+                nameTextView = itemView.findViewById(R.id.studentNameTextView);
+                calculatorNumberTextView = itemView.findViewById(R.id.calculatorNumberTextView);
+                purposeTextView = itemView.findViewById(R.id.purposeTextView);
+                dateTextView = itemView.findViewById(R.id.dateTextView);
+            }
+
+            void bind(final CalculatorRequest request) {
+                nameTextView.setText(request.name);
+                calculatorNumberTextView.setText(request.calculatorNumber);
+                purposeTextView.setText(request.purposeOfBorrowing);
+                dateTextView.setText(request.dateOfBorrowing);
+            }
+        }
     }
 }
-
